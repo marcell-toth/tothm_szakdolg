@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using tothm_szak.Pages;
 
 namespace tothm_szak
 {
@@ -27,17 +28,23 @@ namespace tothm_szak
             
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 0.7);
             this.Height = (this.Width*0.65);
+
         }
         
         private void btPage1_Click(object sender, RoutedEventArgs e)
         {
-            mainFrame.Navigate(new Page1());
+            mainFrame.Content = new MainPage();
+            
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btSettings_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Content = new SettingsPage();
+        }
+
+        private void btExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
-        
     }
 }

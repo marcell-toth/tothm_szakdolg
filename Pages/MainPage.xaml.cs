@@ -24,5 +24,7 @@ namespace tothm_szak.Pages
         {
             InitializeComponent();
         }
+
+        
     }
 }

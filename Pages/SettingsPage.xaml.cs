@@ -13,16 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace tothm_szak
+namespace tothm_szak.Pages
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// Interaction logic for SettingsPage.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class SettingsPage : Page
     {
-        public Page1()
+        public SettingsPage()
         {
             InitializeComponent();
+            //gitTest
         }
     }
 }
