@@ -6,9 +6,7 @@
       xmlns:local="clr-namespace:tothm_szak.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SettingsPage">
+      Title="SettingsPage" Background="#FF10236E" Foreground="#FF10236E">
 
-    <Grid>
-        
-    </Grid>
+    <Grid/>
 </Page>

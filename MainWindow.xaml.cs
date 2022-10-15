@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
@@ -22,6 +23,9 @@ namespace tothm_szak
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        Page mainpage;
+        Page setpage;
         public MainWindow()
         {
             InitializeComponent();
@@ -29,22 +33,47 @@ namespace tothm_szak
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 0.7);
             this.Height = (this.Width*0.65);
 
+            mainpage = new MainPage();
+            setpage = new SettingsPage();
         }
         
+        private void SetVisibilityOnButton()
+        {
+            {
+                mainFrame.Visibility = Visibility.Visible;
+            }
+        }
         private void btPage1_Click(object sender, RoutedEventArgs e)
         {
-            mainFrame.Content = new MainPage();
-            
+            mainFrame.Content = mainpage;
+            SetVisibilityOnButton();
         }
 
         private void btSettings_Click(object sender, RoutedEventArgs e)
         {
-            mainFrame.Content = new SettingsPage();
+            mainFrame.Content = setpage;
+            SetVisibilityOnButton();
         }
 
         private void btExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void btOpenDir_Click(object sender, RoutedEventArgs e)
+        {
+            string folderPath = "";
+
+
+            System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+
+            if (folderBrowserDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                folderPath = folderBrowserDialog1.SelectedPath;
+                tbDirPath.Text = folderPath;
+            }
+
+            
         }
     }
 }

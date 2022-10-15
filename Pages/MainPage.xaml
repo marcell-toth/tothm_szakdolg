@@ -6,9 +6,11 @@
       xmlns:local="clr-namespace:tothm_szak.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainPage">
+      Title="MainPage" Background="#FF6A1C7E">
+
 
     <Grid>
-        
+
     </Grid>
+
 </Page>
