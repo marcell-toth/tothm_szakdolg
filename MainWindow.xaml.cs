@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
@@ -15,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using tothm_szak.Pages;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace tothm_szak
 {
@@ -57,23 +59,24 @@ namespace tothm_szak
 
         private void btExit_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void btOpenDir_Click(object sender, RoutedEventArgs e)
         {
-            string folderPath = "";
 
 
             System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
 
             if (folderBrowserDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                folderPath = folderBrowserDialog1.SelectedPath;
-                tbDirPath.Text = folderPath;
+                
+                ConfigClass.folderPath = folderBrowserDialog1.SelectedPath;
+                tbDirPath.Text = ConfigClass.folderPath;
             }
-
-            
         }
+
+        
+        
     }
 }

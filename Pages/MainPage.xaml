@@ -8,9 +8,41 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage" Background="#FF6A1C7E">
 
-
+    <!-- <Border BorderBrush="Black" Padding="30,30,30,0"> -->
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="16*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="12*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="12*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="2" Grid.Column="1" Background="Gray" />
+        <Grid Grid.Row="2" Grid.Column="3" Background="Gray"/>
+
+        <Border x:Name="bdLeftImg" BorderBrush="Black" BorderThickness="5,5,5,5" Grid.Row="2" Grid.Column="1" />
+        <Border x:Name="bdRightImg" BorderBrush="Black" BorderThickness="5,5,5,5" Grid.Row="2" Grid.Column="3" >
+            <Image x:Name="testImg" Stretch="UniformToFill"/>
+        </Border>
+        <Border BorderThickness="0,0,0,0" Grid.Row="2" Grid.Column="2">
+            <TextBlock x:Name="tbArrow" Grid.Column="2" Grid.Row="2" Text="🡆" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="28"/>
+        </Border>
+        <TextBox x:Name="tbNumberOfImages" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" TextWrapping="Wrap" BorderThickness="0,0,0,0" FontSize="20" Background="{x:Null}" Text="Képek száma: #" Foreground="#FFDED6D6" FontWeight="Bold" HorizontalAlignment="Left"/>
+        <Button x:Name="btRefresh" Grid.Column="3" Content="Refresh" Margin="30,0,0,5" Grid.Row="1" HorizontalAlignment="Left" Click="btRefresh_Click" FontSize="18"/>
+        <Button x:Name="btPrevImg" Grid.Column="3" Content="⇐" Grid.Row="3" HorizontalAlignment="Left" FontSize="48" Click="btPrevImg_Click"/>
+        <Button x:Name="btNextImg" Grid.Column="3" Content="⇒" HorizontalAlignment="Right" Margin="230,0,0,0" Grid.Row="3" FontSize="48" Click="btNextImg_Click"/>
+        <TextBlock x:Name="tbImgCounter" Grid.Column="3" Grid.Row="3" TextWrapping="Wrap" Text="0" TextAlignment="Center" FontSize="50" Margin="150,0,150,0" HorizontalAlignment="Center"/>
     </Grid>
+    <!-- </Border> -->
+
 
 </Page>
