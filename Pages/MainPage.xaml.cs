@@ -59,9 +59,37 @@ namespace tothm_szak.Pages
                 tbImgCounter.Text = "1";
                 btPrevImg.IsEnabled = true;
                 btNextImg.IsEnabled = true;
+                generateButtons(numOfImages);
             }
         }
 
+        private void generateButtons(int buttonCount)
+        {
+            int row = 0;
+            for (int i = 0; i < buttonCount; i++)
+            {
+
+
+                Image imgSelect = new Image();
+                Grid.SetColumn(imgSelect, i - row * 4);
+                Grid.SetRow(imgSelect, row);
+
+                imgSelect.HorizontalAlignment = HorizontalAlignment.Stretch;
+                imgSelect.Height = imgSelect.Width;
+                imgSelect.Stretch = Stretch.Uniform;
+                imgSelect.StretchDirection = StretchDirection.Both;
+
+
+                BitmapImage bimage = new BitmapImage();
+                bimage.BeginInit();
+                bimage.UriSource = new Uri(images[i], UriKind.Absolute);
+                bimage.EndInit();
+                imgSelect.Source = bimage;
+
+                InnerGrid.Children.Add(imgSelect);
+                if (i == 3) { row++; }
+            }
+        }
         private void loadImage(int num)
         {
             BitmapImage bimage = new BitmapImage();

@@ -27,6 +27,7 @@
 
 
         <Frame x:Name="mainFrame" Grid.Column="4" Grid.Row="1" Margin="30,30,30,30" BorderThickness="10,10,10,10" NavigationUIVisibility="Hidden" Visibility="Hidden">
+
             <Frame.BorderBrush>
                 <SolidColorBrush Color="#FF3D0D5C" Opacity="0.5"/>
             </Frame.BorderBrush>

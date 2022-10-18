@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Pages\t1.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Page Update="Pages\MainPage.xaml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Page>
