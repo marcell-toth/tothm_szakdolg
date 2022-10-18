@@ -43,34 +43,15 @@ namespace tothm_szak.Pages
                 .TrimStart('.').ToLowerInvariant()));
 
                 images = imagesInDirectory.ToList();
-
-                ConfigClass.ImgPath = imagesInDirectory;
-
                 numOfImages = imagesInDirectory.Count();
-
                 tbNumberOfImages.Text = "Képek száma: " + numOfImages.ToString();
             }
-            /*
-             * BACKUP, NEEDS FIXING
-             * 
-            List<string> imagesInDirectory = new List<string>();
-                Directory.EnumerateFiles(folderPath, allowedExtensions));
-            foreach (string extension in allowedExtensions)
-            {
-                string m = "";
-                imagesInDirectory.Add(Directory.EnumerateFiles(folderPath, extension));
-                Directory.EnumerateFiles(folderPath, extension);
-            }
-            
-            string[] imagesInDirectory = Directory.GetFiles(folderPath);
-            int szam = imagesInDirectory.Length;
-            tbDirPath.Text = Int32.Parse(imagesInDirectory.Length);
-            */
-
         }
 
         private void btRefresh_Click(object sender, RoutedEventArgs e)
         {
+            currentImage = 0;
+            numOfImages = 0;
             if (ConfigClass.folderPath != "")
             {
                 getImages(ConfigClass.folderPath);
@@ -79,7 +60,6 @@ namespace tothm_szak.Pages
                 btPrevImg.IsEnabled = true;
                 btNextImg.IsEnabled = true;
             }
-            
         }
 
         private void loadImage(int num)
@@ -93,14 +73,12 @@ namespace tothm_szak.Pages
 
         private void loadImageNum(int dir)
         {
-
             if (dir == 0) 
             {
                 if (currentImage != 0) { currentImage--; } else
                 {
                     currentImage = numOfImages - 1;
                 }
-                
                 
                 currentImage = currentImage % numOfImages;
                 tbImgCounter.Text = (currentImage + 1).ToString();
