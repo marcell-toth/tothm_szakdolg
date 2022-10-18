@@ -25,33 +25,31 @@ namespace tothm_szak.Pages
         public MainPage()
         {
             InitializeComponent();
-
         }
 
-        /*
-        public string FoundImageNumber
-        {
-            get { return tbNumberOfImages.Text; }
-            set { tbNumberOfImages.Text = value; }
-        }
-        */
+        public int currentImage { get; set; } = 0;
+        public int numOfImages { get; set; } = 0;
 
+        List<string> images = new List<string>();
 
         private void getImages(string folderPath)
         {
             var allowedExtensions = new[] { "png", "jpg" };
-
-            var imagesInDirectory = Directory
+            if (ConfigClass.folderPath != "")
+            {
+                var imagesInDirectory = Directory
                 .EnumerateFiles(folderPath, "*.*", SearchOption.AllDirectories)
                 .Where(s => allowedExtensions.Contains(System.IO.Path.GetExtension(s)
                 .TrimStart('.').ToLowerInvariant()));
 
-            ConfigClass.ImgPath = imagesInDirectory;
-            
-            int imageNum = imagesInDirectory.Count();
+                images = imagesInDirectory.ToList();
 
-            tbNumberOfImages.Text = "Képek száma: " + imageNum.ToString();
+                ConfigClass.ImgPath = imagesInDirectory;
 
+                numOfImages = imagesInDirectory.Count();
+
+                tbNumberOfImages.Text = "Képek száma: " + numOfImages.ToString();
+            }
             /*
              * BACKUP, NEEDS FIXING
              * 
@@ -73,40 +71,60 @@ namespace tothm_szak.Pages
 
         private void btRefresh_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var img in ConfigClass.ImgPath)
+            if (ConfigClass.folderPath != "")
             {
-
-                BitmapImage bimage = new BitmapImage();
-                bimage.BeginInit();
-                bimage.UriSource = new Uri(img, UriKind.Absolute);
-                bimage.EndInit();
-                testImg.Source = bimage;
-                Thread.Sleep(500);
+                getImages(ConfigClass.folderPath);
+                loadImage(0);
+                tbImgCounter.Text = "1";
+                btPrevImg.IsEnabled = true;
+                btNextImg.IsEnabled = true;
             }
+            
         }
 
-        private void loadImage(int dir)
+        private void loadImage(int num)
         {
-            if (dir == 0) {
-                int s = Int32.Parse(tbImgCounter.Text);
-                tbImgCounter.Text = (s--).ToString();
+            BitmapImage bimage = new BitmapImage();
+            bimage.BeginInit();
+            bimage.UriSource = new Uri(images[num], UriKind.Absolute);
+            bimage.EndInit();
+            testImg.Source = bimage;
+        }
+
+        private void loadImageNum(int dir)
+        {
+
+            if (dir == 0) 
+            {
+                if (currentImage != 0) { currentImage--; } else
+                {
+                    currentImage = numOfImages - 1;
+                }
+                
+                
+                currentImage = currentImage % numOfImages;
+                tbImgCounter.Text = (currentImage + 1).ToString();
             }
 
             if (dir == 1)
             {
-                int s = Int32.Parse(tbImgCounter.Text);
-                tbImgCounter.Text = (s++).ToString();
+                currentImage++;
+                currentImage = currentImage % numOfImages;
+                tbImgCounter.Text = (currentImage + 1).ToString();
             }
+            loadImage(currentImage);
         }
 
         private void btPrevImg_Click(object sender, RoutedEventArgs e)
         {
-            loadImage(0);
+            //back one
+            loadImageNum(0);
         }
 
         private void btNextImg_Click(object sender, RoutedEventArgs e)
         {
-            loadImage(1);
+            //forward one
+            loadImageNum(1);
         }
     }
 }

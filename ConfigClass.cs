@@ -12,7 +12,7 @@ namespace tothm_szak
         //this is a temporary solution
         //try to replace later with OOP
 
-        public static string folderPath = "Path";
+        public static string folderPath = "";
 
         public static IEnumerable<string> ImgPath = Enumerable.Empty<string>();
         
