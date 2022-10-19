@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:tothm_szak"
         mc:Ignorable="d"
-        Title="Szakdolgozat" Background="#FF4F3E5F" Width="850" Height="450" Top="0" Left="0" MinWidth="600" MinHeight="400" Padding="0,0,0,0" ResizeMode="CanResizeWithGrip" >
+        Title="Szakdolgozat" Background="#FF4F3E5F" Width="850" Height="450" Top="0" Left="0" MinWidth="750" MinHeight="450" Padding="0,0,0,0" ResizeMode="CanResizeWithGrip" >
 
 
     <Grid>

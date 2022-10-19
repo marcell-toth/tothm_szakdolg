@@ -14,6 +14,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OpenCvSharp;
+using OpenCvSharp.Extensions;
+using System.Drawing;
+using System.Media;
+using System.Drawing.Imaging;
+//using System.Drawing;
 
 namespace tothm_szak.Pages
 {
@@ -65,38 +71,56 @@ namespace tothm_szak.Pages
 
         private void generateButtons(int buttonCount)
         {
-            int row = 0;
-            for (int i = 0; i < buttonCount; i++)
+            //10 -> 2 in sort
+            int count = 0;
+            for (int row = 0; row < 4; row++)
             {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (count != numOfImages) 
+                    {  
+                        System.Windows.Controls.Image imgSelect = new System.Windows.Controls.Image();
+                        Grid.SetColumn(imgSelect, i);
+                        Grid.SetRow(imgSelect, row);
+
+                        imgSelect.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        imgSelect.Height = imgSelect.Width;
+                        imgSelect.Stretch = Stretch.Uniform;
+                        imgSelect.StretchDirection = StretchDirection.Both;
 
 
-                Image imgSelect = new Image();
-                Grid.SetColumn(imgSelect, i - row * 4);
-                Grid.SetRow(imgSelect, row);
+                        BitmapImage bimage = new BitmapImage();
+                        bimage.BeginInit();
+                        bimage.UriSource = new Uri(images[count], UriKind.Absolute);
+                        bimage.EndInit();
+                        imgSelect.Source = bimage;
 
-                imgSelect.HorizontalAlignment = HorizontalAlignment.Stretch;
-                imgSelect.Height = imgSelect.Width;
-                imgSelect.Stretch = Stretch.Uniform;
-                imgSelect.StretchDirection = StretchDirection.Both;
-
-
-                BitmapImage bimage = new BitmapImage();
-                bimage.BeginInit();
-                bimage.UriSource = new Uri(images[i], UriKind.Absolute);
-                bimage.EndInit();
-                imgSelect.Source = bimage;
-
-                InnerGrid.Children.Add(imgSelect);
-                if (i == 3) { row++; }
+                        InnerGrid.Children.Add(imgSelect);
+                        count++;
+                    }
+                }
             }
         }
         private void loadImage(int num)
         {
+            //Bitmap to MAT format is off
             BitmapImage bimage = new BitmapImage();
             bimage.BeginInit();
             bimage.UriSource = new Uri(images[num], UriKind.Absolute);
             bimage.EndInit();
-            testImg.Source = bimage;
+
+            Bitmap biTest = new Bitmap(100, 100);
+            BitmapImage bmi = new BitmapImage();
+            Mat matTest = new Mat();
+            //Mat matTest2 = new Mat(images[num], ImreadModes.Unchanged);
+
+            biTest = BitmapImage2Bitmap(bimage);               //BMi -> BM
+            //matTest = BitmapConverter.ToMat(biTest);         //BM -> MAT
+            //BitmapConverter.ToBitmap(matTest2, biTest);      //MAT -> BM
+
+            bmi = Bitmap2BitmapImage(biTest);                  //BM -> BMi
+
+            testImg.Source = bmi;                        //display BMi
         }
 
         private void loadImageNum(int dir)
@@ -120,13 +144,54 @@ namespace tothm_szak.Pages
             }
             loadImage(currentImage);
         }
+        public Bitmap ConvertToBitmap(string fileName)
+        {
+            Bitmap bitmap;
+            using (Stream bmpStream = System.IO.File.Open(fileName, System.IO.FileMode.Open))
+            {
+                System.Drawing.Image image = System.Drawing.Image.FromStream(bmpStream);
 
+                bitmap = new Bitmap(image);
+
+            }
+            return bitmap;
+        }
+        private BitmapImage Bitmap2BitmapImage(Bitmap inputBitmap)
+        {
+            using (var memory = new MemoryStream())
+            {
+                inputBitmap.Save(memory, ImageFormat.Png);
+                memory.Position = 0;
+
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+
+                return bitmapImage;
+            }
+        }
+        private Bitmap BitmapImage2Bitmap(BitmapImage bitmapImage)
+        {
+            // BitmapImage bitmapImage = new BitmapImage(new Uri("../Images/test.png", UriKind.Relative));
+
+            using (MemoryStream outStream = new MemoryStream())
+            {
+                BitmapEncoder enc = new BmpBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(bitmapImage));
+                enc.Save(outStream);
+                System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(outStream);
+
+                return new Bitmap(bitmap);
+            }
+        }
         private void btPrevImg_Click(object sender, RoutedEventArgs e)
         {
             //back one
             loadImageNum(0);
         }
-
         private void btNextImg_Click(object sender, RoutedEventArgs e)
         {
             //forward one
