@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,8 @@ using OpenCvSharp.Extensions;
 using System.Drawing;
 using System.Media;
 using System.Drawing.Imaging;
+using OpenCvSharp.XImgProc.Segmentation;
+using System.Collections;
 //using System.Drawing;
 
 namespace tothm_szak.Pages
@@ -104,11 +107,19 @@ namespace tothm_szak.Pages
         private void loadImage(int num)
         {
             //Mat src = Cv2.ImRead(images[num], ImreadModes.Grayscale);
-            Mat src = new Mat(images[num], ImreadModes.Grayscale);
+            Mat src = new Mat(images[num], ImreadModes.Unchanged);
             Bitmap bT = BitmapConverter.ToBitmap(src);
             BitmapImage biT = Bitmap2BitmapImage(bT);
 
-            testImg.Source = biT;                        
+            testImg.Source = biT;
+
+
+
+            src = searchSegment(src);
+            bT = BitmapConverter.ToBitmap(src);
+            biT = Bitmap2BitmapImage(bT);
+
+            testImg.Source = biT;
         }
 
         private void loadImageNum(int dir)
@@ -132,7 +143,7 @@ namespace tothm_szak.Pages
             }
             loadImage(currentImage);
         }
-        public Bitmap ConvertToBitmap(string fileName)
+        private Bitmap ConvertToBitmap(string fileName)
         {
             Bitmap bitmap;
             using (Stream bmpStream = System.IO.File.Open(fileName, System.IO.FileMode.Open))
@@ -185,5 +196,24 @@ namespace tothm_szak.Pages
             //forward one
             loadImageNum(1);
         }
+
+        private Mat searchSegment(Mat src)
+        {
+            var ss = SelectiveSearchSegmentation.Create();
+            ss.SetBaseImage(src);
+
+            ss.SwitchToSelectiveSearchFast(150, 200, 0.8F);
+            //List<OpenCvSharp.Rect> rl = new List<OpenCvSharp.Rect>();
+            //rl.ToArray();
+
+            OpenCvSharp.Rect[] rl;
+            ss.Process(out rl);
+            Trace.WriteLine(rl.Length);
+
+            Scalar sc = new Scalar(0,0,255);
+            Cv2.Rectangle(src, rl[rl.Length-1].TopLeft, rl[rl.Length-1].BottomRight, sc, 3, LineTypes.Link4, 0);
+            return src;
+        }
+
     }
 }
