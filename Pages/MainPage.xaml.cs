@@ -103,7 +103,8 @@ namespace tothm_szak.Pages
         }
         private void loadImage(int num)
         {
-            Mat src = Cv2.ImRead(images[num], ImreadModes.Grayscale);
+            //Mat src = Cv2.ImRead(images[num], ImreadModes.Grayscale);
+            Mat src = new Mat(images[num], ImreadModes.Grayscale);
             Bitmap bT = BitmapConverter.ToBitmap(src);
             BitmapImage biT = Bitmap2BitmapImage(bT);
 
