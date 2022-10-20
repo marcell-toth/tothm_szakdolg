@@ -40,7 +40,7 @@ namespace tothm_szak.Pages
 
         private void getImages(string folderPath)
         {
-            var allowedExtensions = new[] { "png", "jpg" };
+            var allowedExtensions = new[] { "png", "jpg", "jpeg" };
             if (ConfigClass.folderPath != "")
             {
                 var imagesInDirectory = Directory
@@ -103,24 +103,11 @@ namespace tothm_szak.Pages
         }
         private void loadImage(int num)
         {
-            //Bitmap to MAT format is off
-            BitmapImage bimage = new BitmapImage();
-            bimage.BeginInit();
-            bimage.UriSource = new Uri(images[num], UriKind.Absolute);
-            bimage.EndInit();
+            Mat src = Cv2.ImRead(images[num], ImreadModes.Grayscale);
+            Bitmap bT = BitmapConverter.ToBitmap(src);
+            BitmapImage biT = Bitmap2BitmapImage(bT);
 
-            Bitmap biTest = new Bitmap(100, 100);
-            BitmapImage bmi = new BitmapImage();
-            Mat matTest = new Mat();
-            //Mat matTest2 = new Mat(images[num], ImreadModes.Unchanged);
-
-            biTest = BitmapImage2Bitmap(bimage);               //BMi -> BM
-            //matTest = BitmapConverter.ToMat(biTest);         //BM -> MAT
-            //BitmapConverter.ToBitmap(matTest2, biTest);      //MAT -> BM
-
-            bmi = Bitmap2BitmapImage(biTest);                  //BM -> BMi
-
-            testImg.Source = bmi;                        //display BMi
+            testImg.Source = biT;                        
         }
 
         private void loadImageNum(int dir)
@@ -175,7 +162,7 @@ namespace tothm_szak.Pages
         }
         private Bitmap BitmapImage2Bitmap(BitmapImage bitmapImage)
         {
-            // BitmapImage bitmapImage = new BitmapImage(new Uri("../Images/test.png", UriKind.Relative));
+            //BitmapImage bitmapImageT = new BitmapImage(new Uri(images[0], UriKind.Absolute));
 
             using (MemoryStream outStream = new MemoryStream())
             {
