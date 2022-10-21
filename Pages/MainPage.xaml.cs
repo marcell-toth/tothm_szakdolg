@@ -22,6 +22,7 @@ using System.Media;
 using System.Drawing.Imaging;
 using OpenCvSharp.XImgProc.Segmentation;
 using System.Collections;
+using OpenCvSharp.ML;
 //using System.Drawing;
 
 namespace tothm_szak.Pages
@@ -110,11 +111,18 @@ namespace tothm_szak.Pages
         {
             //Mat src = Cv2.ImRead(images[num], ImreadModes.Grayscale);
             Mat src = new Mat(images[num], ImreadModes.Unchanged);
+            Mat srcGray = new Mat(images[num], ImreadModes.Grayscale);
+
             Bitmap bT = BitmapConverter.ToBitmap(src);
+
+
             biT = Bitmap2BitmapImage(bT);
 
-            src = searchSegment(src);
-            Bitmap bTs = BitmapConverter.ToBitmap(src);
+            //srcGray = findCont(srcGray);
+            //src = searchSegment(src);
+            srcGray = simpleTreshold(srcGray);
+
+            Bitmap bTs = BitmapConverter.ToBitmap(srcGray, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
             biTs = Bitmap2BitmapImage(bTs);
 
             loadImageOnly(biT, biTs);
@@ -228,6 +236,37 @@ namespace tothm_szak.Pages
             return src;
         }
 
+        private Mat findCont(Mat src)
+        {
+            Mat dst = src.Clone();
+            OpenCvSharp.Point[][] pl;
+            HierarchyIndex[] hi;
+            Scalar sc = new Scalar(255, 0, 0);
+            Cv2.FindContours(src, out pl, out hi, RetrievalModes.List, ContourApproximationModes.ApproxNone, null);
+
+            var contourIndex = 0;
+            while ((contourIndex >= 0))
+            {
+                if (pl[contourIndex].Length < 250)
+                {
+                    foreach (OpenCvSharp.Point pt in pl[contourIndex])
+                    {
+                        Cv2.Circle(dst, pt.X, pt.Y, 0, sc, -1);
+                    }
+                    
+                }
+                contourIndex = hi[contourIndex].Next;
+            }
+            return dst;
+        }
+
+        private Mat simpleTreshold(Mat src)
+        {
+            Mat dst = src.Clone();
+            dst = dst.MedianBlur(5);
+            Cv2.AdaptiveThreshold(dst, dst, 256, AdaptiveThresholdTypes.GaussianC, ThresholdTypes.BinaryInv, 11, 4);
+            return dst;
+        }
         private void CheckBoxChanged(object sender, RoutedEventArgs e)
         {
             loadImageOnly(biT, biTs);
