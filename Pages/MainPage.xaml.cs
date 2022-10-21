@@ -31,6 +31,8 @@ namespace tothm_szak.Pages
     /// </summary>
     public partial class MainPage : Page
     {
+        BitmapImage biT = new BitmapImage();
+        BitmapImage biTs = new BitmapImage();
         public MainPage()
         {
             InitializeComponent();
@@ -109,17 +111,25 @@ namespace tothm_szak.Pages
             //Mat src = Cv2.ImRead(images[num], ImreadModes.Grayscale);
             Mat src = new Mat(images[num], ImreadModes.Unchanged);
             Bitmap bT = BitmapConverter.ToBitmap(src);
-            BitmapImage biT = Bitmap2BitmapImage(bT);
-
-            testImg.Source = biT;
-
-
-
-            src = searchSegment(src);
-            bT = BitmapConverter.ToBitmap(src);
             biT = Bitmap2BitmapImage(bT);
 
-            testImg.Source = biT;
+            src = searchSegment(src);
+            Bitmap bTs = BitmapConverter.ToBitmap(src);
+            biTs = Bitmap2BitmapImage(bTs);
+
+            loadImageOnly(biT, biTs);
+        }
+
+        private void loadImageOnly(BitmapImage imageBase, BitmapImage imageProc)
+        {
+            if (cbProcessed.IsChecked == true)
+            {
+                testImg.Source = biTs;
+            }
+            else
+            {
+                testImg.Source = biT;
+            }
         }
 
         private void loadImageNum(int dir)
@@ -202,7 +212,7 @@ namespace tothm_szak.Pages
             var ss = SelectiveSearchSegmentation.Create();
             ss.SetBaseImage(src);
 
-            ss.SwitchToSelectiveSearchFast(150, 200, 0.8F);
+            ss.SwitchToSelectiveSearchFast(300, 500, 0.8F);
             //List<OpenCvSharp.Rect> rl = new List<OpenCvSharp.Rect>();
             //rl.ToArray();
 
@@ -211,9 +221,16 @@ namespace tothm_szak.Pages
             Trace.WriteLine(rl.Length);
 
             Scalar sc = new Scalar(0,0,255);
-            Cv2.Rectangle(src, rl[rl.Length-1].TopLeft, rl[rl.Length-1].BottomRight, sc, 3, LineTypes.Link4, 0);
+            foreach (OpenCvSharp.Rect r in rl)
+            {
+                Cv2.Rectangle(src, r.TopLeft, r.BottomRight, sc, 1, LineTypes.Link4, 0);
+            }
             return src;
         }
 
+        private void CheckBoxChanged(object sender, RoutedEventArgs e)
+        {
+            loadImageOnly(biT, biTs);
+        }
     }
 }
