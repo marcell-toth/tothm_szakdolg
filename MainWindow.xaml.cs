@@ -48,6 +48,8 @@ namespace tothm_szak
         private void btPage1_Click(object sender, RoutedEventArgs e)
         {
             mainFrame.Content = mainpage;
+            
+            
             SetVisibilityOnButton();
         }
 
@@ -76,6 +78,11 @@ namespace tothm_szak
             }
         }
 
+        private void enableSideInfo()
+        {
+            tbProcessMode.Text = "Feldolgozás:\n" + ConfigClass.activeProcessMode.ToString();
+            tbAllowedFiles.Text = "Képfájlok:\n";
+        }
         
         
     }

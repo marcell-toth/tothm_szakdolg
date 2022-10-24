@@ -44,10 +44,12 @@ namespace tothm_szak.Pages
 
         List<string> images = new List<string>();
 
-        private void getImages(string folderPath)
+        private bool getImages(string folderPath)
         {
-            var allowedExtensions = new[] { "png", "jpg", "jpeg" };
-            if (ConfigClass.folderPath != "")
+            List<String> allowedExtensions = new List<String>();
+            //allowedExtensions.Add("png");
+            allowedExtensions = allowedFileTypes(allowedExtensions);
+            if (ConfigClass.folderPath != "" && allowedExtensions.Count() > 0)
             {
                 var imagesInDirectory = Directory
                 .EnumerateFiles(folderPath, "*.*", SearchOption.AllDirectories)
@@ -57,7 +59,23 @@ namespace tothm_szak.Pages
                 images = imagesInDirectory.ToList();
                 numOfImages = imagesInDirectory.Count();
                 tbNumberOfImages.Text = "Képek száma: " + numOfImages.ToString();
+                return true;
+            } else
+            {
+                tbImgCounter.Text = "0";
+                btPrevImg.IsEnabled = false;
+                btNextImg.IsEnabled = false;
+                return false;
             }
+        }
+
+        private List<string> allowedFileTypes(List<string> allowedExtensions)
+        {
+            //TODO FIX SELECTION
+            if (ConfigClass.isAllowedPng) { allowedExtensions.Add("png"); }
+            if (ConfigClass.isAllowedJpg) { allowedExtensions.Add("jpg"); }
+            if (ConfigClass.isAllowedJpeg) { allowedExtensions.Add("jpeg"); }
+            return allowedExtensions;
         }
 
         private void btRefresh_Click(object sender, RoutedEventArgs e)
@@ -66,14 +84,23 @@ namespace tothm_szak.Pages
             numOfImages = 0;
             if (ConfigClass.folderPath != "")
             {
-                getImages(ConfigClass.folderPath);
-                loadImage(0);
-                tbImgCounter.Text = "1";
-                btPrevImg.IsEnabled = true;
-                btNextImg.IsEnabled = true;
-                generateButtons(numOfImages);
+                bool pathAndFileCheck = getImages(ConfigClass.folderPath);
+                if (pathAndFileCheck)
+                {
+                    loadImage(0);
+                    tbImgCounter.Text = "1";
+                    btPrevImg.IsEnabled = true;
+                    btNextImg.IsEnabled = true;
+                    generateButtons(numOfImages);
+                } else
+                {
+                    tbImgCounter.Text = "0";
+                    btPrevImg.IsEnabled = false;
+                    btNextImg.IsEnabled = false;
+                }
             }
         }
+
 
         private void generateButtons(int buttonCount)
         {
@@ -115,14 +142,18 @@ namespace tothm_szak.Pages
 
             Bitmap bT = BitmapConverter.ToBitmap(src);
 
-
             biT = Bitmap2BitmapImage(bT);
 
+
+
+            Mat processedImage = selectProcess(src, srcGray);
+
+            //srcGray = gradLaplacian(srcGray);
             //srcGray = findCont(srcGray);
             //src = searchSegment(src);
-            srcGray = simpleTreshold(srcGray);
+            //srcGray = simpleTreshold(srcGray);
 
-            Bitmap bTs = BitmapConverter.ToBitmap(srcGray, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
+            Bitmap bTs = BitmapConverter.ToBitmap(processedImage);
             biTs = Bitmap2BitmapImage(bTs);
 
             loadImageOnly(biT, biTs);
@@ -215,6 +246,48 @@ namespace tothm_szak.Pages
             loadImageNum(1);
         }
 
+        private Mat selectProcess(Mat src, Mat srcGray)
+        {
+            Mat processedImage = new Mat();
+            switch (ConfigClass.activeProcessMode)
+            {
+                case ConfigClass.processMode.None:
+                    {
+                        src.CopyTo(processedImage);
+                        return processedImage;
+                    }
+                case ConfigClass.processMode.Grayscale:
+                    {
+                        srcGray.CopyTo(processedImage);
+                        return processedImage;
+                    }
+                case ConfigClass.processMode.Laplace:
+                    {
+                        processedImage =  gradLaplacian(srcGray);
+                        return processedImage;
+                    }
+                case ConfigClass.processMode.SelectiveSearch:
+                    {
+                        processedImage = searchSegment(src);
+                        return processedImage;
+                    }
+                case ConfigClass.processMode.Contour:
+                    {
+                        processedImage = findCont(srcGray);
+                        return processedImage;
+                    }
+                case ConfigClass.processMode.SimpleTreshold:
+                    {
+                        processedImage = simpleTreshold(srcGray);
+                        return processedImage;
+                    }
+
+                default:
+                    { 
+                        return src;
+                    }
+            }
+        }
         private Mat searchSegment(Mat src)
         {
             var ss = SelectiveSearchSegmentation.Create();
@@ -264,8 +337,13 @@ namespace tothm_szak.Pages
         {
             Mat dst = src.Clone();
             dst = dst.MedianBlur(5);
-            Cv2.AdaptiveThreshold(dst, dst, 256, AdaptiveThresholdTypes.GaussianC, ThresholdTypes.BinaryInv, 11, 4);
+            Cv2.AdaptiveThreshold(dst, dst, 256, AdaptiveThresholdTypes.GaussianC, ThresholdTypes.Binary, 13, 0);
             return dst;
+        }
+        private Mat gradLaplacian(Mat src)
+        {
+            Cv2.Laplacian(src, src, MatType.CV_8UC3, 3, 1, 0, BorderTypes.Default);
+            return src;
         }
         private void CheckBoxChanged(object sender, RoutedEventArgs e)
         {

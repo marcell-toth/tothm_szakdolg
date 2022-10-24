@@ -15,7 +15,22 @@ namespace tothm_szak
         public static string folderPath = "";
 
         public static IEnumerable<string> ImgPath = Enumerable.Empty<string>();
-        
+
+        public static processMode activeProcessMode = processMode.None;
+        public enum processMode
+        {
+            None,
+            Grayscale,
+            SimpleTreshold,
+            Laplace,
+            Contour,
+            SelectiveSearch
+        }
+
+        //allowed file extensions
+        public static bool isAllowedPng = true;
+        public static bool isAllowedJpeg = true;
+        public static bool isAllowedJpg = true;
         
     }
 }

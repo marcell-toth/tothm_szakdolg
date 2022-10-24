@@ -25,5 +25,60 @@ namespace tothm_szak.Pages
             InitializeComponent();
             //gitTest
         }
+
+        private void btGrayscale_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfigClass.activeProcessMode = ConfigClass.processMode.Grayscale;
+        }
+
+        private void btLaplace_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfigClass.activeProcessMode = ConfigClass.processMode.Laplace;
+        }
+
+        private void btContour_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfigClass.activeProcessMode = ConfigClass.processMode.Contour;
+        }
+
+        private void btSearchSegment_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfigClass.activeProcessMode = ConfigClass.processMode.SelectiveSearch;
+        }
+
+        private void btTreshold_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfigClass.activeProcessMode = ConfigClass.processMode.SimpleTreshold;
+        }
+
+        private void btNone_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfigClass.activeProcessMode= ConfigClass.processMode.None;
+        }
+
+        private void FileTypeCheck(object sender, RoutedEventArgs e)
+        {
+            if (settingsGrid.IsInitialized == true)
+            {
+
+                if (cbFilePng.IsChecked == true)
+                {
+                    ConfigClass.isAllowedPng = true;
+                }
+                else { ConfigClass.isAllowedPng = false; }
+
+                if (cbFileJpg.IsChecked == true)
+                {
+                    ConfigClass.isAllowedJpg = true;
+                }
+                else { ConfigClass.isAllowedJpg = false; }
+
+                if (cbFileJpeg.IsChecked == true)
+                {
+                    ConfigClass.isAllowedJpeg = true;
+                }
+                else { ConfigClass.isAllowedJpeg = false; }
+            }
+        }
     }
 }
