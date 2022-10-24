@@ -48,8 +48,7 @@ namespace tothm_szak
         private void btPage1_Click(object sender, RoutedEventArgs e)
         {
             mainFrame.Content = mainpage;
-            
-            
+            enableSideInfo();
             SetVisibilityOnButton();
         }
 
@@ -82,8 +81,13 @@ namespace tothm_szak
         {
             tbProcessMode.Text = "Feldolgozás:\n" + ConfigClass.activeProcessMode.ToString();
             tbAllowedFiles.Text = "Képfájlok:\n";
+            if (ConfigClass.isAllowedPng) tbAllowedFiles.Text = tbAllowedFiles.Text + "PNG ";
+            if (ConfigClass.isAllowedJpg) tbAllowedFiles.Text = tbAllowedFiles.Text + "JPG ";
+            if (ConfigClass.isAllowedJpeg) tbAllowedFiles.Text = tbAllowedFiles.Text + "JPEG ";
+            tbAllowedFiles.Visibility = Visibility.Visible;
+            tbProcessMode.Visibility = Visibility.Visible;
         }
-        
-        
+
+
     }
 }

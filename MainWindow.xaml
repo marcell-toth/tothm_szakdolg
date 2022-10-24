@@ -5,7 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:tothm_szak"
         mc:Ignorable="d"
-        Title="Szakdolgozat" Background="#FF4F3E5F" Width="850" Height="450" Top="0" Left="0" MinWidth="750" MinHeight="500" Padding="0,0,0,0" ResizeMode="CanResizeWithGrip" >
+        Title="Szakdolgozat" Width="850" Height="450" Top="0" Left="0" MinWidth="750" MinHeight="500" Padding="0,0,0,0" ResizeMode="CanResizeWithGrip" >
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF251D2B" Offset="0.783"/>
+            <GradientStop Color="#FF4F3E5F" Offset="0"/>
+            <GradientStop Color="#FF1B1521" Offset="0.993"/>
+        </LinearGradientBrush>
+    </Window.Background>
 
 
     <Grid>
@@ -26,7 +33,7 @@
 
 
 
-        <Frame x:Name="mainFrame" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" Margin="30,30,30,30" BorderThickness="10,10,10,10" NavigationUIVisibility="Hidden" Visibility="Hidden">
+        <Frame x:Name="mainFrame" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Margin="30,30,30,30" BorderThickness="10,10,10,10" NavigationUIVisibility="Hidden" Visibility="Hidden">
 
             <Frame.BorderBrush>
                 <SolidColorBrush Color="#FF3D0D5C" Opacity="0.5"/>

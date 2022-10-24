@@ -47,7 +47,6 @@ namespace tothm_szak.Pages
         private bool getImages(string folderPath)
         {
             List<String> allowedExtensions = new List<String>();
-            //allowedExtensions.Add("png");
             allowedExtensions = allowedFileTypes(allowedExtensions);
             if (ConfigClass.folderPath != "" && allowedExtensions.Count() > 0)
             {
@@ -59,6 +58,7 @@ namespace tothm_szak.Pages
                 images = imagesInDirectory.ToList();
                 numOfImages = imagesInDirectory.Count();
                 tbNumberOfImages.Text = "Képek száma: " + numOfImages.ToString();
+                if (numOfImages == 0) return false;
                 return true;
             } else
             {
@@ -68,16 +68,14 @@ namespace tothm_szak.Pages
                 return false;
             }
         }
-
         private List<string> allowedFileTypes(List<string> allowedExtensions)
         {
             //TODO FIX SELECTION
-            if (ConfigClass.isAllowedPng) { allowedExtensions.Add("png"); }
+            if (ConfigClass.isAllowedPng) { allowedExtensions.Add("png"); } 
             if (ConfigClass.isAllowedJpg) { allowedExtensions.Add("jpg"); }
             if (ConfigClass.isAllowedJpeg) { allowedExtensions.Add("jpeg"); }
             return allowedExtensions;
         }
-
         private void btRefresh_Click(object sender, RoutedEventArgs e)
         {
             currentImage = 0;
@@ -100,8 +98,6 @@ namespace tothm_szak.Pages
                 }
             }
         }
-
-
         private void generateButtons(int buttonCount)
         {
             //10 -> 2 in sort
@@ -148,17 +144,11 @@ namespace tothm_szak.Pages
 
             Mat processedImage = selectProcess(src, srcGray);
 
-            //srcGray = gradLaplacian(srcGray);
-            //srcGray = findCont(srcGray);
-            //src = searchSegment(src);
-            //srcGray = simpleTreshold(srcGray);
-
             Bitmap bTs = BitmapConverter.ToBitmap(processedImage);
             biTs = Bitmap2BitmapImage(bTs);
 
             loadImageOnly(biT, biTs);
         }
-
         private void loadImageOnly(BitmapImage imageBase, BitmapImage imageProc)
         {
             if (cbProcessed.IsChecked == true)
@@ -170,7 +160,6 @@ namespace tothm_szak.Pages
                 testImg.Source = biT;
             }
         }
-
         private void loadImageNum(int dir)
         {
             if (dir == 0) 
@@ -192,6 +181,7 @@ namespace tothm_szak.Pages
             }
             loadImage(currentImage);
         }
+        
         private Bitmap ConvertToBitmap(string fileName)
         {
             Bitmap bitmap;
@@ -245,7 +235,7 @@ namespace tothm_szak.Pages
             //forward one
             loadImageNum(1);
         }
-
+        
         private Mat selectProcess(Mat src, Mat srcGray)
         {
             Mat processedImage = new Mat();
@@ -308,7 +298,6 @@ namespace tothm_szak.Pages
             }
             return src;
         }
-
         private Mat findCont(Mat src)
         {
             Mat dst = src.Clone();
@@ -332,7 +321,6 @@ namespace tothm_szak.Pages
             }
             return dst;
         }
-
         private Mat simpleTreshold(Mat src)
         {
             Mat dst = src.Clone();
