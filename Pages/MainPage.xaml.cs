@@ -323,12 +323,25 @@ namespace tothm_szak.Pages
 
             Cv2.FindContours(src, out pl, out hi, RetrievalModes.Tree, ContourApproximationModes.ApproxNone, null);
             //pl.Sort((OpenCvSharp.Point[] x, OpenCvSharp.Point[] y) => IComparer.Compare(Cv2.ContourArea(pl[x]) > Cv2.ContourArea(pl[x])));
-            sortConts(pl);
+            //sortConts(pl);
+            //pl = (OpenCvSharp.Point[][])pl.Where(x => Cv2.ContourArea(x) > 5);        wtf
+            //pl = (OpenCvSharp.Point[][])pl.Where(x => x.GetType() == OpenCvSharp.Point[]);
+
             Cv2.DrawContours(dst, pl, -1, sc, 1, LineTypes.Link8);
 
             return dst;
         }
-
+        /*
+        private bool ContourSizeCheck(OpenCvSharp.Point[] x)
+        {
+            if (Cv2.ContourArea(x) > 5)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
         private OpenCvSharp.Point[][] sortConts(OpenCvSharp.Point[][] contours)
         {
             List<OpenCvSharp.Point[]> contourList = contours.ToList();
@@ -373,6 +386,8 @@ namespace tothm_szak.Pages
                 }
             }
         }
+        */
+
         private Mat adaptiveThreshold(Mat src)
         {
             Mat dst = src.Clone();
