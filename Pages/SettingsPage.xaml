@@ -25,7 +25,7 @@
 
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="tbProcessMode" Text="Feldolgozás módja" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="18" Margin="10,20,0,0" TextWrapping="Wrap"/>
+        <TextBlock x:Name="tbProcessMode" Text="Feldolgozás módja" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="20" Margin="10,20,0,0" TextWrapping="Wrap"/>
         <RadioButton x:Name="btNone" Content="None" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btNone_Checked" IsChecked="True"/>
         <RadioButton x:Name="btGrayscale" Content="Grayscale" HorizontalAlignment="Left" Margin="10,110,0,0" Foreground="#FFD1CECE" FontSize="16" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Checked="btGrayscale_Checked"/>
         <RadioButton x:Name="btLaplace" Content="Laplace gradient" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btLaplace_Checked"/>
@@ -35,7 +35,7 @@
         <RadioButton x:Name="btAdpThreshold" Content="Adaptive threshold" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btAdpThreshold_Checked"/>
 
 
-        <TextBlock x:Name="tbImgType" Text="Kép formátum" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="18" Margin="10,20,0,0" TextWrapping="Wrap"/>
+        <TextBlock x:Name="tbImgType" Text="Kép formátum" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="20" Margin="10,20,0,0" TextWrapping="Wrap"/>
         <CheckBox x:Name="cbFilePng" Grid.Column="1" Content=".PNG" HorizontalAlignment="Left" Margin="50,80,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" RenderTransformOrigin="0.5,0.5" Padding="4,-1,0,0" IsChecked="True" Checked="FileTypeCheck" Unchecked="FileTypeCheck">
             <CheckBox.RenderTransform>
                 <TransformGroup>
