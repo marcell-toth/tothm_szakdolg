@@ -23,6 +23,7 @@ using System.Drawing.Imaging;
 using OpenCvSharp.XImgProc.Segmentation;
 using System.Collections;
 using OpenCvSharp.ML;
+using System.Windows.Forms;
 //using System.Drawing;
 
 namespace tothm_szak.Pages
@@ -70,16 +71,25 @@ namespace tothm_szak.Pages
         }
         private List<string> allowedFileTypes(List<string> allowedExtensions)
         {
-            //TODO FIX SELECTION
-            if (ConfigClass.isAllowedPng) { allowedExtensions.Add("png"); } 
-            if (ConfigClass.isAllowedJpg) { allowedExtensions.Add("jpg"); }
-            if (ConfigClass.isAllowedJpeg) { allowedExtensions.Add("jpeg"); }
+            if (ConfigClass.isAllowedPng) { allowedExtensions.Add("png"); }  else
+            {
+                allowedExtensions.RemoveAll(p => p == "png");
+            }
+            if (ConfigClass.isAllowedJpg) { allowedExtensions.Add("jpg"); } else
+            {
+                allowedExtensions.RemoveAll(p => p == "jpg");
+            }
+            if (ConfigClass.isAllowedJpeg) { allowedExtensions.Add("jpeg"); } else
+            {
+                allowedExtensions.RemoveAll(p => p == "jpeg");
+            }
             return allowedExtensions;
         }
         private void btRefresh_Click(object sender, RoutedEventArgs e)
         {
             currentImage = 0;
             numOfImages = 0;
+            InnerGrid.Children.RemoveRange(0, InnerGrid.Children.Count);
             if (ConfigClass.folderPath != "")
             {
                 bool pathAndFileCheck = getImages(ConfigClass.folderPath);
@@ -100,7 +110,6 @@ namespace tothm_szak.Pages
         }
         private void generateButtons(int buttonCount)
         {
-            //10 -> 2 in sort
             int count = 0;
             for (int row = 0; row < 4; row++)
             {
@@ -112,7 +121,7 @@ namespace tothm_szak.Pages
                         Grid.SetColumn(imgSelect, i);
                         Grid.SetRow(imgSelect, row);
 
-                        imgSelect.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        imgSelect.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
                         imgSelect.Height = imgSelect.Width;
                         imgSelect.Stretch = Stretch.Uniform;
                         imgSelect.StretchDirection = StretchDirection.Both;
