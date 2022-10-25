@@ -152,8 +152,8 @@ namespace tothm_szak.Pages
 
 
             Mat processedImage = selectProcess(src, srcGray);
-
-            Bitmap bTs = BitmapConverter.ToBitmap(processedImage);
+            Cv2.CvtColor(processedImage, processedImage, ColorConversionCodes.RGBA2RGB);
+            Bitmap bTs = BitmapConverter.ToBitmap(processedImage, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
             biTs = Bitmap2BitmapImage(bTs);
 
             loadImageOnly(biT, biTs);
