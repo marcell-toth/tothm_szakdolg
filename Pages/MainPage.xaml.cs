@@ -272,15 +272,19 @@ namespace tothm_szak.Pages
                     }
                 case ConfigClass.processMode.Contour:
                     {
-                        processedImage = findCont(srcGray);
+                        processedImage = findCont(src);
                         return processedImage;
                     }
-                case ConfigClass.processMode.SimpleTreshold:
+                case ConfigClass.processMode.SimpleThreshold:
                     {
-                        processedImage = simpleTreshold(srcGray);
+                        processedImage = simpleThreshold(srcGray);
                         return processedImage;
                     }
-
+                case ConfigClass.processMode.AdaptiveThreshold:
+                    {
+                        processedImage = adaptiveThreshold(srcGray);
+                        return processedImage;
+                    }
                 default:
                     { 
                         return src;
@@ -310,32 +314,29 @@ namespace tothm_szak.Pages
         private Mat findCont(Mat src)
         {
             Mat dst = src.Clone();
+            Cv2.CvtColor(src, src, ColorConversionCodes.BGR2GRAY);
+            src = simpleThreshold(src);
             OpenCvSharp.Point[][] pl;
             HierarchyIndex[] hi;
-            Scalar sc = new Scalar(255, 0, 0);
-            Cv2.FindContours(src, out pl, out hi, RetrievalModes.List, ContourApproximationModes.ApproxNone, null);
+            Scalar sc = new Scalar(0, 0, 255);
 
-            var contourIndex = 0;
-            while ((contourIndex >= 0))
-            {
-                if (pl[contourIndex].Length < 250)
-                {
-                    foreach (OpenCvSharp.Point pt in pl[contourIndex])
-                    {
-                        Cv2.Circle(dst, pt.X, pt.Y, 0, sc, -1);
-                    }
-                    
-                }
-                contourIndex = hi[contourIndex].Next;
-            }
+            Cv2.FindContours(src, out pl, out hi, RetrievalModes.Tree, ContourApproximationModes.ApproxNone, null);
+            Cv2.DrawContours(dst, pl, -1, sc, 1, LineTypes.Link8);
+
             return dst;
         }
-        private Mat simpleTreshold(Mat src)
+        private Mat adaptiveThreshold(Mat src)
         {
             Mat dst = src.Clone();
-            dst = dst.MedianBlur(5);
-            Cv2.AdaptiveThreshold(dst, dst, 256, AdaptiveThresholdTypes.GaussianC, ThresholdTypes.Binary, 13, 0);
+            dst = dst.MedianBlur(3);
+            Cv2.AdaptiveThreshold(dst, dst, 255, AdaptiveThresholdTypes.GaussianC, ThresholdTypes.BinaryInv, 7, 7);
             return dst;
+        }
+
+        private Mat simpleThreshold(Mat src)
+        {
+            Cv2.Threshold(src, src, 150, 255, ThresholdTypes.Binary);
+            return src;
         }
         private Mat gradLaplacian(Mat src)
         {

@@ -31,7 +31,9 @@
         <RadioButton x:Name="btLaplace" Content="Laplace gradient" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btLaplace_Checked"/>
         <RadioButton x:Name="btContour" Content="Contour search" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btContour_Checked"/>
         <RadioButton x:Name="btSearchSegment" Content="Search segment" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btSearchSegment_Checked"/>
-        <RadioButton x:Name="btTreshold" Content="Simple treshold" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btTreshold_Checked"/>
+        <RadioButton x:Name="btSimThreshold" Content="Simple threshold" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btSimThreshold_Checked"/>
+        <RadioButton x:Name="btAdpThreshold" Content="Adaptive threshold" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btAdpThreshold_Checked"/>
+
 
         <TextBlock x:Name="tbImgType" Text="Kép formátum" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="18" Margin="10,20,0,0" TextWrapping="Wrap"/>
         <CheckBox x:Name="cbFilePng" Grid.Column="1" Content=".PNG" HorizontalAlignment="Left" Margin="50,80,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" RenderTransformOrigin="0.5,0.5" Padding="4,-1,0,0" IsChecked="True" Checked="FileTypeCheck" Unchecked="FileTypeCheck">

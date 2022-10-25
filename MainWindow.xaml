@@ -18,7 +18,7 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="45px" />
+            <RowDefinition Height="45px"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -33,8 +33,9 @@
 
         <Rectangle Grid.Row="0" Grid.ColumnSpan="5">
             <Rectangle.Fill>
+
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF3E2D4C" Offset="0" />
+                    <GradientStop Color="#FF271735" Offset="0" />
                     <GradientStop Color="#FF17121C" Offset="1" />
                     <GradientStop Color="#FF211A28" Offset="0.911"/>
                 </LinearGradientBrush>

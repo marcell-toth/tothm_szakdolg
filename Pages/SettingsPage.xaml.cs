@@ -46,9 +46,14 @@ namespace tothm_szak.Pages
             ConfigClass.activeProcessMode = ConfigClass.processMode.SelectiveSearch;
         }
 
-        private void btTreshold_Checked(object sender, RoutedEventArgs e)
+        private void btSimThreshold_Checked(object sender, RoutedEventArgs e)
         {
-            ConfigClass.activeProcessMode = ConfigClass.processMode.SimpleTreshold;
+            ConfigClass.activeProcessMode = ConfigClass.processMode.SimpleThreshold;
+        }
+
+        private void btAdpThreshold_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfigClass.activeProcessMode = ConfigClass.processMode.AdaptiveThreshold;
         }
 
         private void btNone_Checked(object sender, RoutedEventArgs e)
