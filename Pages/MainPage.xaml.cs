@@ -24,6 +24,7 @@ using OpenCvSharp.XImgProc.Segmentation;
 using System.Collections;
 using OpenCvSharp.ML;
 using System.Windows.Forms;
+using tothm_szak.ProcessMethods;
 //using System.Drawing;
 
 namespace tothm_szak.Pages
@@ -35,6 +36,7 @@ namespace tothm_szak.Pages
     {
         BitmapImage biT = new BitmapImage();
         BitmapImage biTs = new BitmapImage();
+        //MainWindow mainwin = (MainWindow)System.Windows.Window.GetWindow(this);
         public MainPage()
         {
             InitializeComponent();
@@ -94,7 +96,7 @@ namespace tothm_szak.Pages
             {
                 bool pathAndFileCheck = getImages(ConfigClass.folderPath);
                 if (pathAndFileCheck)
-                {
+                {              
                     loadImage(0);
                     tbImgCounter.Text = "1";
                     btPrevImg.IsEnabled = true;
@@ -147,14 +149,14 @@ namespace tothm_szak.Pages
 
             Bitmap bT = BitmapConverter.ToBitmap(src);
 
-            biT = Bitmap2BitmapImage(bT);
+            biT = ImageProcUtility.Bitmap2BitmapImage(bT);
 
 
 
             Mat processedImage = selectProcess(src, srcGray);
             Cv2.CvtColor(processedImage, processedImage, ColorConversionCodes.RGBA2RGB);
             Bitmap bTs = BitmapConverter.ToBitmap(processedImage, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-            biTs = Bitmap2BitmapImage(bTs);
+            biTs = ImageProcUtility.Bitmap2BitmapImage(bTs);
 
             loadImageOnly(biT, biTs);
         }
@@ -190,50 +192,6 @@ namespace tothm_szak.Pages
             }
             loadImage(currentImage);
         }
-        
-        private Bitmap ConvertToBitmap(string fileName)
-        {
-            Bitmap bitmap;
-            using (Stream bmpStream = System.IO.File.Open(fileName, System.IO.FileMode.Open))
-            {
-                System.Drawing.Image image = System.Drawing.Image.FromStream(bmpStream);
-
-                bitmap = new Bitmap(image);
-
-            }
-            return bitmap;
-        }
-        private BitmapImage Bitmap2BitmapImage(Bitmap inputBitmap)
-        {
-            using (var memory = new MemoryStream())
-            {
-                inputBitmap.Save(memory, ImageFormat.Png);
-                memory.Position = 0;
-
-                BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-                bitmapImage.Freeze();
-
-                return bitmapImage;
-            }
-        }
-        private Bitmap BitmapImage2Bitmap(BitmapImage bitmapImage)
-        {
-            //BitmapImage bitmapImageT = new BitmapImage(new Uri(images[0], UriKind.Absolute));
-
-            using (MemoryStream outStream = new MemoryStream())
-            {
-                BitmapEncoder enc = new BmpBitmapEncoder();
-                enc.Frames.Add(BitmapFrame.Create(bitmapImage));
-                enc.Save(outStream);
-                System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(outStream);
-
-                return new Bitmap(bitmap);
-            }
-        }
         private void btPrevImg_Click(object sender, RoutedEventArgs e)
         {
             //back one
@@ -244,7 +202,10 @@ namespace tothm_szak.Pages
             //forward one
             loadImageNum(1);
         }
-        
+        private void CheckBoxChanged(object sender, RoutedEventArgs e)
+        {
+            loadImageOnly(biT, biTs);
+        }
         private Mat selectProcess(Mat src, Mat srcGray)
         {
             Mat processedImage = new Mat();
@@ -262,27 +223,32 @@ namespace tothm_szak.Pages
                     }
                 case ConfigClass.processMode.Laplace:
                     {
-                        processedImage =  gradLaplacian(srcGray);
+                        laplacian lL = new();
+                        processedImage =  lL.gradLaplacianImg(srcGray);
                         return processedImage;
                     }
                 case ConfigClass.processMode.SelectiveSearch:
                     {
-                        processedImage = searchSegment(src);
+                        selectiveSearch sS = new();
+                        processedImage = sS.searchSegmentImg(src);
                         return processedImage;
                     }
                 case ConfigClass.processMode.Contour:
                     {
-                        processedImage = findCont(src);
+                        findContours fC = new();
+                        processedImage = fC.findContImg(src);
                         return processedImage;
                     }
                 case ConfigClass.processMode.SimpleThreshold:
                     {
-                        processedImage = simpleThreshold(srcGray);
+                        simpleThreshold sT = new();
+                        processedImage = sT.simpleThresholdImg(srcGray);
                         return processedImage;
                     }
                 case ConfigClass.processMode.AdaptiveThreshold:
                     {
-                        processedImage = adaptiveThreshold(srcGray);
+                        adaptiveThreshold aT = new();
+                        processedImage = aT.adaptiveThresholdImg(srcGray);
                         return processedImage;
                     }
                 default:
@@ -291,124 +257,6 @@ namespace tothm_szak.Pages
                     }
             }
         }
-        private Mat searchSegment(Mat src)
-        {
-            var ss = SelectiveSearchSegmentation.Create();
-            ss.SetBaseImage(src);
-
-            ss.SwitchToSelectiveSearchFast(300, 500, 0.8F);
-            //List<OpenCvSharp.Rect> rl = new List<OpenCvSharp.Rect>();
-            //rl.ToArray();
-
-            OpenCvSharp.Rect[] rl;
-            ss.Process(out rl);
-            Trace.WriteLine(rl.Length);
-
-            Scalar sc = new Scalar(0,0,255);
-            foreach (OpenCvSharp.Rect r in rl)
-            {
-                Cv2.Rectangle(src, r.TopLeft, r.BottomRight, sc, 1, LineTypes.Link4, 0);
-            }
-            return src;
-        }
-        private Mat findCont(Mat src)
-        {
-            Mat dst = src.Clone();
-            Cv2.CvtColor(src, src, ColorConversionCodes.BGR2GRAY);
-            src = adaptiveThreshold(src);
-            //src = simpleThreshold(src);
-            OpenCvSharp.Point[][] pl;
-            HierarchyIndex[] hi;
-            Scalar sc = new Scalar(0, 0, 255);
-
-            Cv2.FindContours(src, out pl, out hi, RetrievalModes.Tree, ContourApproximationModes.ApproxNone, null);
-            //pl.Sort((OpenCvSharp.Point[] x, OpenCvSharp.Point[] y) => IComparer.Compare(Cv2.ContourArea(pl[x]) > Cv2.ContourArea(pl[x])));
-            //sortConts(pl);
-            //pl = (OpenCvSharp.Point[][])pl.Where(x => Cv2.ContourArea(x) > 5);        wtf
-            //pl = (OpenCvSharp.Point[][])pl.Where(x => x.GetType() == OpenCvSharp.Point[]);
-
-            Cv2.DrawContours(dst, pl, -1, sc, 1, LineTypes.Link8);
-
-            return dst;
-        }
-        /*
-        private bool ContourSizeCheck(OpenCvSharp.Point[] x)
-        {
-            if (Cv2.ContourArea(x) > 5)
-            {
-                return true;
-            } else
-            {
-                return false;
-            }
-        }
-        private OpenCvSharp.Point[][] sortConts(OpenCvSharp.Point[][] contours)
-        {
-            List<OpenCvSharp.Point[]> contourList = contours.ToList();
-            contourList.Sort((OpenCvSharp.Point[] x, OpenCvSharp.Point[] y) => CompareBySize(x, y));
-            for (int i=0; i < contours.GetLength(0); i++)
-            {
-                for (int j = 0; j < contours.GetLength(0); j++)
-                {
-                    Trace.WriteLine(Cv2.ContourArea(contours[j]));
-                }
-                Trace.WriteLine("END OF ITERATION");
-            }
-            return contours;
-        }
-
-        //this is awful but it somehow works
-        public static int CompareBySize(OpenCvSharp.Point[] x, OpenCvSharp.Point[] y)
-        {
-            if (x == null)
-            {
-                if (y == null)
-                {
-                    return 0;
-                } else
-                {
-                    return -1;
-                }
-            } else
-            {
-                if (y == null)
-                {
-                    return 1;
-                }    else
-                {
-                    if (Cv2.ContourArea(x) > Cv2.ContourArea(y))
-                    {
-                        return 1;
-                    } else
-                    {
-                        return -1;
-                    }
-                }
-            }
-        }
-        */
-
-        private Mat adaptiveThreshold(Mat src)
-        {
-            Mat dst = src.Clone();
-            dst = dst.MedianBlur(3);
-            Cv2.AdaptiveThreshold(dst, dst, 255, AdaptiveThresholdTypes.GaussianC, ThresholdTypes.BinaryInv, 7, 7);
-            return dst;
-        }
-
-        private Mat simpleThreshold(Mat src)
-        {
-            Cv2.Threshold(src, src, 150, 255, ThresholdTypes.Binary);
-            return src;
-        }
-        private Mat gradLaplacian(Mat src)
-        {
-            Cv2.Laplacian(src, src, MatType.CV_8UC3, 3, 1, 0, BorderTypes.Default);
-            return src;
-        }
-        private void CheckBoxChanged(object sender, RoutedEventArgs e)
-        {
-            loadImageOnly(biT, biTs);
-        }
+        
     }
 }
