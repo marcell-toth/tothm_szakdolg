@@ -32,11 +32,13 @@ namespace tothm_szak.Pages
     /// <summary>
     /// Interaction logic for MainPage.xaml
     /// </summary>
+    /// MainWindow mainwin = (MainWindow)System.Windows.Window.GetWindow(this);
+    /// Definitely check out Accord + Accord.Imaging NuGet packages
     public partial class MainPage : Page
     {
         BitmapImage biT = new BitmapImage();
         BitmapImage biTs = new BitmapImage();
-        //MainWindow mainwin = (MainWindow)System.Windows.Window.GetWindow(this);
+        
         public MainPage()
         {
             InitializeComponent();

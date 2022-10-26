@@ -13,13 +13,11 @@ namespace tothm_szak.ProcessMethods
     {
         public Mat findContImg(Mat src)
         {
-            simpleThreshold sT = new();
             adaptiveThreshold aT = new();
             Mat dst = src.Clone();
             Cv2.CvtColor(src, src, ColorConversionCodes.BGR2GRAY);
             Cv2.MedianBlur(src, src, 3);
             src = aT.adaptiveThresholdImg(src);
-            //src = sT.simpleThresholdImg(src);
             OpenCvSharp.Point[][] pl;
             HierarchyIndex[] hi;
             Scalar sc = new Scalar(0, 0, 255);
@@ -27,7 +25,7 @@ namespace tothm_szak.ProcessMethods
             Cv2.FindContours(src, out pl, out hi, RetrievalModes.List, ContourApproximationModes.ApproxNone, null);
             Array.Sort(pl, (x, y) => Cv2.ContourArea(x).CompareTo(Cv2.ContourArea(y)));
 
-            Cv2.DrawContours(dst, pl.Where(x => Cv2.ContourArea(x) > 20), -1, sc, 1, LineTypes.Link8);
+            Cv2.DrawContours(dst, pl.Where(x => Cv2.ContourArea(x) > 10), -1, sc, 1, LineTypes.Link8);
 
             return dst;
         }
