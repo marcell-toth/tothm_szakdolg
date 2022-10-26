@@ -39,7 +39,7 @@ namespace tothm_szak
             setpage = new SettingsPage();
         }
         
-        private void SetVisibilityOnButton()
+        public void SetVisibilityOnButton()
         {
             {
                 mainFrame.Visibility = Visibility.Visible;
@@ -87,7 +87,6 @@ namespace tothm_szak
             tbAllowedFiles.Visibility = Visibility.Visible;
             tbProcessMode.Visibility = Visibility.Visible;
         }
-
 
     }
 }
