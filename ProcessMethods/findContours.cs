@@ -2,6 +2,7 @@
 using OpenCvSharp;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,22 +13,21 @@ namespace tothm_szak.ProcessMethods
     {
         public Mat findContImg(Mat src)
         {
+            simpleThreshold sT = new();
             adaptiveThreshold aT = new();
             Mat dst = src.Clone();
             Cv2.CvtColor(src, src, ColorConversionCodes.BGR2GRAY);
+            Cv2.MedianBlur(src, src, 3);
             src = aT.adaptiveThresholdImg(src);
-            //src = simpleThreshold(src);
+            //src = sT.simpleThresholdImg(src);
             OpenCvSharp.Point[][] pl;
             HierarchyIndex[] hi;
             Scalar sc = new Scalar(0, 0, 255);
 
-            Cv2.FindContours(src, out pl, out hi, RetrievalModes.Tree, ContourApproximationModes.ApproxNone, null);
-            //pl.Sort((OpenCvSharp.Point[] x, OpenCvSharp.Point[] y) => IComparer.Compare(Cv2.ContourArea(pl[x]) > Cv2.ContourArea(pl[x])));
-            //sortConts(pl);
-            //pl = (OpenCvSharp.Point[][])pl.Where(x => Cv2.ContourArea(x) > 5);        wtf
-            //pl = (OpenCvSharp.Point[][])pl.Where(x => x.GetType() == OpenCvSharp.Point[]);
+            Cv2.FindContours(src, out pl, out hi, RetrievalModes.List, ContourApproximationModes.ApproxNone, null);
+            Array.Sort(pl, (x, y) => Cv2.ContourArea(x).CompareTo(Cv2.ContourArea(y)));
 
-            Cv2.DrawContours(dst, pl, -1, sc, 1, LineTypes.Link8);
+            Cv2.DrawContours(dst, pl.Where(x => Cv2.ContourArea(x) > 20), -1, sc, 1, LineTypes.Link8);
 
             return dst;
         }

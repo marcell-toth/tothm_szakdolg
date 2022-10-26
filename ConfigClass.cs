@@ -24,6 +24,7 @@ namespace tothm_szak
             Grayscale,
             SimpleThreshold,
             AdaptiveThreshold,
+            OtsuThreshold,
             Laplace,
             Contour,
             SelectiveSearch

@@ -245,6 +245,12 @@ namespace tothm_szak.Pages
                         processedImage = sT.simpleThresholdImg(srcGray);
                         return processedImage;
                     }
+                case ConfigClass.processMode.OtsuThreshold:
+                    {
+                        otsuThreshold oT = new();
+                        processedImage = oT.otsuThresholdImg(srcGray);
+                        return processedImage;
+                    }
                 case ConfigClass.processMode.AdaptiveThreshold:
                     {
                         adaptiveThreshold aT = new();

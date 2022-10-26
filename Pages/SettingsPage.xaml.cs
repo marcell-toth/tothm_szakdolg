@@ -60,6 +60,10 @@ namespace tothm_szak.Pages
         {
             ConfigClass.activeProcessMode= ConfigClass.processMode.None;
         }
+        private void btOtsuThreshold_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfigClass.activeProcessMode = ConfigClass.processMode.OtsuThreshold;
+        }
 
         private void FileTypeCheck(object sender, RoutedEventArgs e)
         {
