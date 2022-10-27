@@ -122,26 +122,39 @@ namespace tothm_szak.Pages
                     if (count != numOfImages) 
                     {  
                         System.Windows.Controls.Image imgSelect = new System.Windows.Controls.Image();
-                        Grid.SetColumn(imgSelect, i);
-                        Grid.SetRow(imgSelect, row);
+                        System.Windows.Controls.Button imgButton = new System.Windows.Controls.Button();
+
+                        imgButton.Content = imgSelect;
+                        Grid.SetColumn(imgButton, i);
+                        Grid.SetRow(imgButton, row);
 
                         imgSelect.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
                         imgSelect.Height = imgSelect.Width;
                         imgSelect.Stretch = Stretch.Uniform;
                         imgSelect.StretchDirection = StretchDirection.Both;
 
+                        int currentNum = count;
+                        imgButton.Click += delegate(object sender, RoutedEventArgs e) { imgButton_Click(sender, e, currentNum); };
 
                         BitmapImage bimage = new BitmapImage();
                         bimage.BeginInit();
                         bimage.UriSource = new Uri(images[count], UriKind.Absolute);
                         bimage.EndInit();
                         imgSelect.Source = bimage;
+                        
 
-                        InnerGrid.Children.Add(imgSelect);
+                        InnerGrid.Children.Add(imgButton);
                         count++;
                     }
                 }
             }
+        }
+
+        void imgButton_Click(object sender, RoutedEventArgs e, int imgNum)
+        {
+            currentImage = imgNum;
+            loadImage(imgNum);
+            loadImageNum(imgNum);
         }
         private void loadImage(int num)
         {
@@ -175,34 +188,46 @@ namespace tothm_szak.Pages
         }
         private void loadImageNum(int dir)
         {
-            if (dir == 0) 
+            switch (dir)
             {
-                if (currentImage != 0) { currentImage--; } else
-                {
-                    currentImage = numOfImages - 1;
-                }
-                
-                currentImage = currentImage % numOfImages;
-                tbImgCounter.Text = (currentImage + 1).ToString();
+                case -2:
+                    {
+                        
+                        if (currentImage != 0) { currentImage--; }
+                        else
+                        {
+                            currentImage = numOfImages - 1;
+                        }
+                        
+                        currentImage = currentImage % numOfImages;
+                        tbImgCounter.Text = (currentImage + 1).ToString();
+                        loadImage(currentImage);
+                        break;
+                    }
+                case -1:
+                    {
+                        currentImage++;
+                        currentImage = currentImage % numOfImages;
+                        tbImgCounter.Text = (currentImage + 1).ToString();
+                        loadImage(currentImage);
+                        break;
+                    }
+                default:
+                    loadImage(dir);
+                    tbImgCounter.Text = (dir + 1).ToString();
+                    break;
             }
-
-            if (dir == 1)
-            {
-                currentImage++;
-                currentImage = currentImage % numOfImages;
-                tbImgCounter.Text = (currentImage + 1).ToString();
-            }
-            loadImage(currentImage);
+            
         }
         private void btPrevImg_Click(object sender, RoutedEventArgs e)
         {
             //back one
-            loadImageNum(0);
+            loadImageNum(-2);
         }
         private void btNextImg_Click(object sender, RoutedEventArgs e)
         {
             //forward one
-            loadImageNum(1);
+            loadImageNum(-1);
         }
         private void CheckBoxChanged(object sender, RoutedEventArgs e)
         {
