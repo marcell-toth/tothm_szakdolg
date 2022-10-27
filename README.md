@@ -1,6 +1,6 @@
 # tothm_szakdolg
 
-Tóth Marcell Milán
+Tóth Marcell M.
 NEPTUN: R05E4K
 
 Szakdolgozat project

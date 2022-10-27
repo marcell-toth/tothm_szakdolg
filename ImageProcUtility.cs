@@ -10,6 +10,10 @@ using System.Windows.Media.Imaging;
 
 namespace tothm_szak
 {
+    /// <summary>
+    /// Static utility class for commonly used methods
+    /// Contains conversion methods
+    /// </summary>
     public static class ImageProcUtility
     {
         public static Bitmap ConvertToBitmap(string fileName)
@@ -20,7 +24,6 @@ namespace tothm_szak
                 System.Drawing.Image image = System.Drawing.Image.FromStream(bmpStream);
 
                 bitmap = new Bitmap(image);
-
             }
             return bitmap;
         }

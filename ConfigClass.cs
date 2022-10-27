@@ -13,6 +13,13 @@ namespace tothm_szak
         //this is a temporary solution
         //try to replace later with OOP
 
+        /// <summary>
+        /// Static class for storing global variables used through the application
+        /// Contains the path to the folder containing the sampled images,
+        /// a string list, the selected process mode, possible process modes
+        /// and the allowed file extensions
+        /// </summary>
+
         public static string folderPath = "";
 
         public static IEnumerable<string> ImgPath = Enumerable.Empty<string>();

@@ -46,6 +46,7 @@ namespace tothm_szak.Pages
 
         public int currentImage { get; set; } = 0;
         public int numOfImages { get; set; } = 0;
+        public int currentPage { get; set; } = 0;
 
         List<string> images = new List<string>();
 
@@ -103,7 +104,7 @@ namespace tothm_szak.Pages
                     tbImgCounter.Text = "1";
                     btPrevImg.IsEnabled = true;
                     btNextImg.IsEnabled = true;
-                    generateButtons(numOfImages);
+                    generateButtons(currentPage);
                 } else
                 {
                     tbImgCounter.Text = "0";
@@ -112,15 +113,21 @@ namespace tothm_szak.Pages
                 }
             }
         }
-        private void generateButtons(int buttonCount)
+        private void generateButtons(int previewPage)
         {
-            int count = 0;
+            InnerGrid.Children.RemoveRange(0, InnerGrid.Children.Count);
+            int renderStart = (0 + previewPage) * 16;
+            int renderStop = numOfImages - renderStart;
+            if (renderStop > 16) { renderStop = 16; }
+            renderStop = renderStop + renderStart;
+
+            int count = renderStart;
             for (int row = 0; row < 4; row++)
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    if (count != numOfImages) 
-                    {  
+                    if (count != renderStop)
+                    {
                         System.Windows.Controls.Image imgSelect = new System.Windows.Controls.Image();
                         System.Windows.Controls.Button imgButton = new System.Windows.Controls.Button();
 
@@ -134,18 +141,18 @@ namespace tothm_szak.Pages
                         imgSelect.StretchDirection = StretchDirection.Both;
 
                         int currentNum = count;
-                        imgButton.Click += delegate(object sender, RoutedEventArgs e) { imgButton_Click(sender, e, currentNum); };
+                        imgButton.Click += delegate (object sender, RoutedEventArgs e) { imgButton_Click(sender, e, currentNum); };
 
                         BitmapImage bimage = new BitmapImage();
                         bimage.BeginInit();
                         bimage.UriSource = new Uri(images[count], UriKind.Absolute);
                         bimage.EndInit();
                         imgSelect.Source = bimage;
-                        
 
                         InnerGrid.Children.Add(imgButton);
                         count++;
                     }
+                    else { break; }
                 }
             }
         }
@@ -190,24 +197,24 @@ namespace tothm_szak.Pages
         {
             switch (dir)
             {
-                case -2:
+                case -2:    //cycle back
                     {
-                        
                         if (currentImage != 0) { currentImage--; }
                         else
                         {
                             currentImage = numOfImages - 1;
                         }
-                        
+                                        
                         currentImage = currentImage % numOfImages;
                         tbImgCounter.Text = (currentImage + 1).ToString();
                         loadImage(currentImage);
                         break;
                     }
-                case -1:
+                case -1:    //cycle forward
                     {
                         currentImage++;
                         currentImage = currentImage % numOfImages;
+
                         tbImgCounter.Text = (currentImage + 1).ToString();
                         loadImage(currentImage);
                         break;
@@ -217,7 +224,17 @@ namespace tothm_szak.Pages
                     tbImgCounter.Text = (dir + 1).ToString();
                     break;
             }
-            
+            cyclePage(currentImage);
+        }
+
+        private void cyclePage(int currentImg)
+        {
+            int cmpPage = (currentImg) / 16;
+            if (cmpPage != currentPage)
+            {
+                currentPage = cmpPage;
+                generateButtons(cmpPage);
+            }
         }
         private void btPrevImg_Click(object sender, RoutedEventArgs e)
         {
