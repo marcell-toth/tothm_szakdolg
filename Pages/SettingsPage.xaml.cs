@@ -64,6 +64,10 @@ namespace tothm_szak.Pages
         {
             ConfigClass.activeProcessMode = ConfigClass.processMode.OtsuThreshold;
         }
+        private void btBradleyThreshold_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfigClass.activeProcessMode = ConfigClass.processMode.BradleyThreshold;
+        }
 
         private void FileTypeCheck(object sender, RoutedEventArgs e)
         {

@@ -25,7 +25,7 @@ namespace tothm_szak.ProcessMethods
             Cv2.FindContours(src, out pl, out hi, RetrievalModes.List, ContourApproximationModes.ApproxNone, null);
             Array.Sort(pl, (x, y) => Cv2.ContourArea(x).CompareTo(Cv2.ContourArea(y)));
 
-            Cv2.DrawContours(dst, pl.Where(x => Cv2.ContourArea(x) > 10), -1, sc, 1, LineTypes.Link8);
+            Cv2.DrawContours(dst, pl.Where(x => Cv2.ContourArea(x) > 5), -1, sc, 1, LineTypes.Link8);
 
             return dst;
         }

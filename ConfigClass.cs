@@ -25,6 +25,7 @@ namespace tothm_szak
             SimpleThreshold,
             AdaptiveThreshold,
             OtsuThreshold,
+            BradleyThreshold,
             Laplace,
             Contour,
             SelectiveSearch

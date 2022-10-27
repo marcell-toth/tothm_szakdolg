@@ -163,9 +163,9 @@ namespace tothm_szak.Pages
             Mat srcGray = new Mat(images[num], ImreadModes.Grayscale);
 
             Bitmap bT = BitmapConverter.ToBitmap(src);
+            
 
             biT = ImageProcUtility.Bitmap2BitmapImage(bT);
-
 
 
             Mat processedImage = selectProcess(src, srcGray);
@@ -284,12 +284,34 @@ namespace tothm_szak.Pages
                         processedImage = aT.adaptiveThresholdImg(srcGray);
                         return processedImage;
                     }
+                case ConfigClass.processMode.BradleyThreshold:
+                    {
+                        bradleyThreshold bT = new();
+
+                        return processedImage;
+                    }
                 default:
                     { 
                         return src;
                     }
             }
         }
-        
+
+        private void Page_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Left:
+                    btPrevImg_Click(sender, e);
+                    e.Handled = true;
+                    break;
+                case Key.Right:
+                    btNextImg_Click(sender, e);
+                    e.Handled = true;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
