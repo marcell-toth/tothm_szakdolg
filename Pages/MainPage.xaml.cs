@@ -25,6 +25,7 @@ using System.Collections;
 using OpenCvSharp.ML;
 using System.Windows.Forms;
 using tothm_szak.ProcessMethods;
+using OpenCvSharp.XFeatures2D;
 //using System.Drawing;
 
 namespace tothm_szak.Pages
@@ -155,6 +156,7 @@ namespace tothm_szak.Pages
                     else { break; }
                 }
             }
+            tbCurrentPage.Text = "Oldal: " + (currentPage + 1);
         }
 
         void imgButton_Click(object sender, RoutedEventArgs e, int imgNum)
@@ -336,9 +338,69 @@ namespace tothm_szak.Pages
                     btNextImg_Click(sender, e);
                     e.Handled = true;
                     break;
+                case Key.Up:
+                    btPageUp_Click(sender, e);
+                    e.Handled = true;
+                    break;
+                case Key.Down:
+                    btPageDown_Click(sender, e);
+                    e.Handled = true;
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void pageButtonHandling(int dir)
+        {
+            switch (dir)
+            {
+                case 0:
+                    {
+                        if (currentPage == numOfImages / 16)
+                        {
+                            currentPage = 0;
+                        }
+                        else
+                        {
+                            currentPage++;
+                        }
+                        currentImage = currentPage * 16;
+                        generateButtons(currentPage);
+                        loadImage(currentImage);
+                        tbImgCounter.Text = (currentImage + 1).ToString();
+                        break;
+                    }
+                case 1:
+                    {
+                        if (currentPage == 0)
+                        {
+                            currentPage = numOfImages / 16;
+                        } else
+                        {
+                            currentPage--;
+                        }
+                        currentImage = currentPage * 16;
+                        generateButtons(currentPage);
+                        loadImage(currentImage);
+                        tbImgCounter.Text = (currentImage + 1).ToString();
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void btPageDown_Click(object sender, RoutedEventArgs e)
+        {
+            pageButtonHandling(0);
+        }
+
+        private void btPageUp_Click(object sender, RoutedEventArgs e)
+        {
+            pageButtonHandling(1);
         }
     }
 }

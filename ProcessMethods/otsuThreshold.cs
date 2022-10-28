@@ -11,9 +11,9 @@ namespace tothm_szak.ProcessMethods
     {
         public Mat otsuThresholdImg(Mat src)
         {
-            //Cv2.MedianBlur(src, src, 3);
-            Cv2.GaussianBlur(src, src, new Size(3,3), 3, 3,BorderTypes.Default);
+            Cv2.GaussianBlur(src, src, new Size(3,3), 0, 0,BorderTypes.Default);
             Cv2.Threshold(src, src, 150, 255, ThresholdTypes.Otsu);
+
             return src;
         }
     }

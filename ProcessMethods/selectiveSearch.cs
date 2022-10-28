@@ -15,8 +15,9 @@ namespace tothm_szak.ProcessMethods
         {
             var ss = SelectiveSearchSegmentation.Create();
             ss.SetBaseImage(src);
+            ss.SwitchToSingleStrategy(350, 0.95F);
 
-            ss.SwitchToSelectiveSearchFast(300, 500, 0.8F);
+            //ss.SwitchToSelectiveSearchFast(50, 200, 0.8F);
             //List<OpenCvSharp.Rect> rl = new List<OpenCvSharp.Rect>();
             //rl.ToArray();
 

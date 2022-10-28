@@ -16,8 +16,11 @@ namespace tothm_szak.ProcessMethods
             adaptiveThreshold aT = new();
             Mat dst = src.Clone();
             Cv2.CvtColor(src, src, ColorConversionCodes.BGR2GRAY);
-            Cv2.MedianBlur(src, src, 3);
-            src = aT.adaptiveThresholdImg(src);
+
+            Cv2.GaussianBlur(src, src, new Size(3, 3), 0, 0, BorderTypes.Default);
+            Cv2.Threshold(src, src, 150, 255, ThresholdTypes.Otsu);
+            //Cv2.MedianBlur(src, src, 3);
+            //src = aT.adaptiveThresholdImg(src);
             OpenCvSharp.Point[][] pl;
             HierarchyIndex[] hi;
             Scalar sc = new Scalar(0, 0, 255);
