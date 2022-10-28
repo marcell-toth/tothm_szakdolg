@@ -68,6 +68,10 @@ namespace tothm_szak.Pages
         {
             ConfigClass.activeProcessMode = ConfigClass.processMode.BradleyThreshold;
         }
+        private void btCannyEdgeDet_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfigClass.activeProcessMode = ConfigClass.processMode.Canny;
+        }
 
         private void FileTypeCheck(object sender, RoutedEventArgs e)
         {

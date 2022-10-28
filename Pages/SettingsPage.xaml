@@ -35,6 +35,8 @@
         <RadioButton x:Name="btAdpThreshold" Content="Adaptive threshold" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btAdpThreshold_Checked"/>
         <RadioButton x:Name="btOtsuThreshold" Content="Otsu threshold" HorizontalAlignment="Left" Margin="10,290,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btOtsuThreshold_Checked"/>
         <RadioButton x:Name="btBradleyThreshold" Content="Bradley threshold" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btBradleyThreshold_Checked"/>
+        <RadioButton x:Name="btCannyEdgeDet" Content="Canny edge detection" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btCannyEdgeDet_Checked"/>
+
 
 
         <TextBlock x:Name="tbImgType" Text="Kép formátum" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="20" Margin="10,20,0,0" TextWrapping="Wrap"/>

@@ -16,8 +16,6 @@ namespace tothm_szak.ProcessMethods
     {
         public Mat bradleyThresholdImg(Mat src)
         {
-            
-
             return src;
         }
     }

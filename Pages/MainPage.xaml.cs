@@ -304,7 +304,13 @@ namespace tothm_szak.Pages
                 case ConfigClass.processMode.BradleyThreshold:
                     {
                         bradleyThreshold bT = new();
-
+                        processedImage = bT.bradleyThresholdImg(srcGray);
+                        return processedImage;
+                    }
+                case ConfigClass.processMode.Canny:
+                    {
+                        cannyEdgeDetection cED = new();
+                        processedImage = cED.cannyEdgeDetectionImg(srcGray);
                         return processedImage;
                     }
                 default:

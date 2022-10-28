@@ -34,6 +34,7 @@ namespace tothm_szak
             OtsuThreshold,
             BradleyThreshold,
             Laplace,
+            Canny,
             Contour,
             SelectiveSearch
         }
