@@ -165,6 +165,7 @@ namespace tothm_szak.Pages
         }
         private void loadImage(int num)
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             //Mat src = Cv2.ImRead(images[num], ImreadModes.Grayscale);
             Mat src = new Mat(images[num], ImreadModes.Unchanged);
             Mat srcGray = new Mat(images[num], ImreadModes.Grayscale);
@@ -181,6 +182,9 @@ namespace tothm_szak.Pages
             biTs = ImageProcUtility.Bitmap2BitmapImage(bTs);
 
             loadImageOnly(biT, biTs);
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            lbExecTime.Content = "Time: " + elapsedMs +"ms";
         }
         private void loadImageOnly(BitmapImage imageBase, BitmapImage imageProc)
         {

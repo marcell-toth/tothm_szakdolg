@@ -73,6 +73,7 @@
                 <ScaleTransform ScaleX="1.8" ScaleY="1.8"/>
             </CheckBox.LayoutTransform>
         </CheckBox>
+        <Label x:Name="lbExecTime" Grid.Column="1" Content="Time: (ms)" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" FontSize="24" Foreground="#FFC8C8C8"/>
     </Grid>
     <!-- </Border> -->
 
