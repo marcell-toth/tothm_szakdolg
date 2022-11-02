@@ -16,6 +16,19 @@ namespace tothm_szak.ProcessMethods
     {
         public Mat bradleyThresholdImg(Mat src)
         {
+            // flips img in grayscale
+            // mainly a test for pixel get/set manipulation
+            int i = 0;
+            while (i < src.Cols / 2)
+            {
+                for (int j = 0; j < src.Rows; j++)
+                {
+                    byte hp = src.At<byte>(j, src.Cols - i);
+                    src.At<byte>(j, src.Cols - i) = src.At<byte>(j, i);
+                    src.At<byte>(j, i) = hp;
+                }
+                i++;
+            }
             return src;
         }
     }

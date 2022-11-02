@@ -14,6 +14,11 @@ namespace tothm_szak.ProcessMethods
         public Mat searchSegmentImg(Mat src)
         {
             var ss = SelectiveSearchSegmentation.Create();
+
+            Cv2.GaussianBlur(src, src, new Size(3, 3), 0, 0, BorderTypes.Default);
+            Cv2.Threshold(src, src, 150, 255, ThresholdTypes.Otsu);
+            Cv2.CvtColor(src, src, ColorConversionCodes.GRAY2BGR);
+
             ss.SetBaseImage(src);
             ss.SwitchToSingleStrategy(350, 0.95F);
 

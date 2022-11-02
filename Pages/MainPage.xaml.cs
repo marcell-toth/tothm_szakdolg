@@ -34,7 +34,7 @@ namespace tothm_szak.Pages
     /// Interaction logic for MainPage.xaml
     /// </summary>
     /// MainWindow mainwin = (MainWindow)System.Windows.Window.GetWindow(this);
-    /// Definitely check out Accord + Accord.Imaging NuGet packages
+
     public partial class MainPage : Page
     {
         BitmapImage biT = new BitmapImage();
@@ -174,9 +174,7 @@ namespace tothm_szak.Pages
 
             Bitmap bT = BitmapConverter.ToBitmap(src);
             
-
             biT = ImageProcUtility.Bitmap2BitmapImage(bT);
-
 
             Mat processedImage = selectProcess(src, srcGray);
             Cv2.CvtColor(processedImage, processedImage, ColorConversionCodes.RGBA2RGB);
@@ -280,7 +278,7 @@ namespace tothm_szak.Pages
                 case ConfigClass.processMode.SelectiveSearch:
                     {
                         selectiveSearch sS = new();
-                        processedImage = sS.searchSegmentImg(src);
+                        processedImage = sS.searchSegmentImg(srcGray);
                         return processedImage;
                     }
                 case ConfigClass.processMode.Contour:
@@ -357,7 +355,7 @@ namespace tothm_szak.Pages
             {
                 case 0:
                     {
-                        if (currentPage == numOfImages / 16)
+                        if ((currentPage + 1) * 16 >= numOfImages)
                         {
                             currentPage = 0;
                         }
@@ -376,6 +374,7 @@ namespace tothm_szak.Pages
                         if (currentPage == 0)
                         {
                             currentPage = numOfImages / 16;
+                            if (numOfImages % 16 == 0) { currentPage--; }
                         } else
                         {
                             currentPage--;
