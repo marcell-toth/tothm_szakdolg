@@ -42,9 +42,9 @@ namespace tothm_szak.ProcessMethods
             Mat intImg = integralImage(source);
             Mat outImg = new Mat(source.Rows, source.Cols, MatType.CV_8UC1);
 
-            for (int i = 0; i < source.Cols; i++)
+            for (int i = 0; i < source.Rows; i++)
             {
-                for (int j = 0; j < source.Rows; j++)
+                for (int j = 0; j < source.Cols; j++)
                 {
                     int x1 = i - s / 2;
                     int x2 = i + s / 2;
@@ -52,14 +52,13 @@ namespace tothm_szak.ProcessMethods
                     int y2 = j + s / 2;
 
                     if (x1 < 0) { x1 = 0; }
-                    if (x2 > source.Cols - 1) { x2 = source.Cols - 1; }
+                    if (x2 > source.Rows - 1) { x2 = source.Rows - 1; }
 
                     if (y1 < 0) { y1 = 0; }
-                    if (y2 > source.Rows - 1) { y2 = source.Rows - 1; }
+                    if (y2 > source.Cols - 1) { y2 = source.Cols - 1; }
 
                     int count = (x2 - x1 + 1) * (y2 - y1 + 1);
                     int sum = intImg.At<int>(x2, y2) - intImg.At<int>(x2, y1) - intImg.At<int>(x1, y2) + intImg.At<int>(x1, y1);
-
 
                     if ((source.At<byte>(i, j) * count) < (sum * (100 - t) / 100))
                     {
