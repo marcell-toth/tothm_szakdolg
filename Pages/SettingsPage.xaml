@@ -36,6 +36,7 @@
         <RadioButton x:Name="btOtsuThreshold" Content="Otsu threshold" HorizontalAlignment="Left" Margin="10,290,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btOtsuThreshold_Checked"/>
         <RadioButton x:Name="btBradleyThreshold" Content="Bradley threshold" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btBradleyThreshold_Checked"/>
         <RadioButton x:Name="btCannyEdgeDet" Content="Canny edge detection" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btCannyEdgeDet_Checked"/>
+        <RadioButton x:Name="btKMeans" Content="K-Means" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btKMeans_Checked"/>
 
 
 

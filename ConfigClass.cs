@@ -36,7 +36,8 @@ namespace tothm_szak
             Laplace,
             Canny,
             Contour,
-            SelectiveSearch
+            SelectiveSearch,
+            KMeans
         }
 
         //allowed file extensions

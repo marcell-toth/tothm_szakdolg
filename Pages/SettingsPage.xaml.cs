@@ -72,6 +72,10 @@ namespace tothm_szak.Pages
         {
             ConfigClass.activeProcessMode = ConfigClass.processMode.Canny;
         }
+        private void btKMeans_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfigClass.activeProcessMode = ConfigClass.processMode.KMeans;
+        }
 
         private void FileTypeCheck(object sender, RoutedEventArgs e)
         {

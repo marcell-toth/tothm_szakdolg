@@ -317,6 +317,12 @@ namespace tothm_szak.Pages
                         processedImage = cED.processAndReturnImage(src);
                         return processedImage;
                     }
+                case ConfigClass.processMode.KMeans:
+                    {
+                        kMeans kM = new();
+                        processedImage = kM.processAndReturnImage(src);
+                        return processedImage;
+                    }
                 default:
                     { 
                         return src;
