@@ -9,28 +9,37 @@ using System.Threading.Tasks;
 
 namespace tothm_szak.ProcessMethods
 {
-    internal class findContours
+    internal class findContours : IClassification
     {
-        public Mat findContImg(Mat src)
+        public Mat? baseImage { get; set; }
+        public Mat processAndReturnImage(Mat source)
         {
-            adaptiveThreshold aT = new();
-            Mat dst = src.Clone();
-            Cv2.CvtColor(src, src, ColorConversionCodes.BGR2GRAY);
+            if (source != null && !source.Empty())
+            {
+                //adaptiveThreshold aT = new();
+                baseImage = source;
+                Mat processedImage = new Mat();
 
-            Cv2.GaussianBlur(src, src, new Size(3, 3), 0, 0, BorderTypes.Default);
-            Cv2.Threshold(src, src, 150, 255, ThresholdTypes.Otsu);
-            //Cv2.MedianBlur(src, src, 3);
-            //src = aT.adaptiveThresholdImg(src);
-            OpenCvSharp.Point[][] pl;
-            HierarchyIndex[] hi;
-            Scalar sc = new Scalar(0, 0, 255);
+                Cv2.CvtColor(baseImage, processedImage, ColorConversionCodes.BGR2GRAY);
+                Cv2.GaussianBlur(processedImage, processedImage, new Size(3, 3), 0, 0, BorderTypes.Default);
+                Cv2.Threshold(processedImage, processedImage, 150, 255, ThresholdTypes.Otsu);
+                //Cv2.MedianBlur(src, src, 3);
+                //src = aT.adaptiveThresholdImg(src);
+                OpenCvSharp.Point[][] pl;
+                HierarchyIndex[] hi;
 
-            Cv2.FindContours(src, out pl, out hi, RetrievalModes.List, ContourApproximationModes.ApproxNone, null);
-            Array.Sort(pl, (x, y) => Cv2.ContourArea(x).CompareTo(Cv2.ContourArea(y)));
 
-            Cv2.DrawContours(dst, pl.Where(x => Cv2.ContourArea(x) > 5), -1, sc, 1, LineTypes.Link8);
+                Cv2.FindContours(processedImage, out pl, out hi, RetrievalModes.List, ContourApproximationModes.ApproxNone, null);
+                Array.Sort(pl, (x, y) => Cv2.ContourArea(x).CompareTo(Cv2.ContourArea(y)));
 
-            return dst;
+                processedImage = baseImage;
+                Cv2.DrawContours(processedImage, pl.Where(x => Cv2.ContourArea(x) > 5), -1, new Scalar(0, 0, 255), 1, LineTypes.Link8);
+
+                return processedImage;
+            } else
+            {
+                return new Mat(256, 256, MatType.CV_8UC1, 0);
+            }
         }
          
         private bool ContourSizeCheck(OpenCvSharp.Point[] x)

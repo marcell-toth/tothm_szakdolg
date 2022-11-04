@@ -9,33 +9,43 @@ using System.Threading.Tasks;
 
 namespace tothm_szak.ProcessMethods
 {
-    internal class selectiveSearch
+    internal class selectiveSearch : IClassification
     {
-        public Mat searchSegmentImg(Mat src)
+        public Mat? baseImage { get; set; }
+        public Mat processAndReturnImage(Mat source)
         {
-            var ss = SelectiveSearchSegmentation.Create();
-
-            Cv2.GaussianBlur(src, src, new Size(3, 3), 0, 0, BorderTypes.Default);
-            Cv2.Threshold(src, src, 150, 255, ThresholdTypes.Otsu);
-            Cv2.CvtColor(src, src, ColorConversionCodes.GRAY2BGR);
-
-            ss.SetBaseImage(src);
-            ss.SwitchToSingleStrategy(350, 0.95F);
-
-            //ss.SwitchToSelectiveSearchFast(50, 200, 0.8F);
-            //List<OpenCvSharp.Rect> rl = new List<OpenCvSharp.Rect>();
-            //rl.ToArray();
-
-            OpenCvSharp.Rect[] rl;
-            ss.Process(out rl);
-            Trace.WriteLine(rl.Length);
-
-            Scalar sc = new Scalar(0, 0, 255);
-            foreach (OpenCvSharp.Rect r in rl)
+            if (source != null && !source.Empty())
             {
-                Cv2.Rectangle(src, r.TopLeft, r.BottomRight, sc, 1, LineTypes.Link4, 0);
+                baseImage = source;
+                Mat processedImage = new Mat();
+                var ss = SelectiveSearchSegmentation.Create();
+
+                Cv2.CvtColor(baseImage, processedImage, ColorConversionCodes.BGR2GRAY);
+                Cv2.GaussianBlur(processedImage, processedImage, new Size(3, 3), 0, 0, BorderTypes.Default);
+                Cv2.Threshold(processedImage, processedImage, 150, 255, ThresholdTypes.Otsu);
+                Cv2.CvtColor(processedImage, processedImage, ColorConversionCodes.GRAY2BGR);
+
+                ss.SetBaseImage(processedImage);
+                ss.SwitchToSingleStrategy(350, 0.95F);
+
+                //ss.SwitchToSelectiveSearchFast(50, 200, 0.8F);
+                //List<OpenCvSharp.Rect> rl = new List<OpenCvSharp.Rect>();
+                //rl.ToArray();
+
+                OpenCvSharp.Rect[] rl;
+                ss.Process(out rl);
+                Trace.WriteLine(rl.Length);
+
+                Scalar sc = new Scalar(0, 0, 255);
+                foreach (OpenCvSharp.Rect r in rl)
+                {
+                    Cv2.Rectangle(baseImage, r.TopLeft, r.BottomRight, sc, 1, LineTypes.Link4, 0);
+                }
+                return baseImage;
+            } else
+            {
+                return new Mat(256, 256, MatType.CV_8UC1, 0);
             }
-            return src;
         }
     }
 }

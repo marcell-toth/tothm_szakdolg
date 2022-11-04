@@ -7,12 +7,23 @@ using System.Threading.Tasks;
 
 namespace tothm_szak.ProcessMethods
 {
-    internal class simpleThreshold
+    internal class simpleThreshold : IClassification
     {
-        public Mat simpleThresholdImg(Mat src)
+        public Mat? baseImage { get; set; }
+        public Mat processAndReturnImage(Mat source)
         {
-            Cv2.Threshold(src, src, 150, 255, ThresholdTypes.Binary);
-            return src;
+            if (source != null && !source.Empty())
+            {
+                baseImage = source;
+                Mat processedImage = new Mat();
+
+                Cv2.CvtColor(baseImage, processedImage, ColorConversionCodes.BGR2GRAY);
+                Cv2.Threshold(processedImage, processedImage, 150, 255, ThresholdTypes.Binary);
+                return processedImage;
+            } else
+            {
+                return new Mat(256, 256, MatType.CV_8UC1, 0);
+            }
         }
     }
 }

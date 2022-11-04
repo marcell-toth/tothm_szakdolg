@@ -14,11 +14,21 @@ namespace tothm_szak.ProcessMethods
 {
     internal class bradleyThreshold
     {
-        public Mat bradleyThresholdImg(Mat src)
+        public Mat? baseImage { get; set; }
+        public Mat processAndReturnImage(Mat source)
         {
-            src = bradleyThresholdProc(src);
-            return src;
+            if (source != null && !source.Empty())
+            {
+                baseImage = source;
+                Mat processedImage = new Mat();
+                Cv2.CvtColor(baseImage, processedImage, ColorConversionCodes.BGR2GRAY);
 
+                processedImage = bradleyThresholdProc(baseImage);
+                return processedImage;
+            } else
+            {
+                return new Mat(256, 256, MatType.CV_8UC1, 0);
+            }
             /*
             // flips img in grayscale
             // mainly a test for pixel get/set manipulation

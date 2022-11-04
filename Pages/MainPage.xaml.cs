@@ -272,49 +272,49 @@ namespace tothm_szak.Pages
                 case ConfigClass.processMode.Laplace:
                     {
                         laplacian lL = new();
-                        processedImage =  lL.gradLaplacianImg(srcGray);
+                        processedImage =  lL.processAndReturnImage(src);
                         return processedImage;
                     }
                 case ConfigClass.processMode.SelectiveSearch:
                     {
                         selectiveSearch sS = new();
-                        processedImage = sS.searchSegmentImg(srcGray);
+                        processedImage = sS.processAndReturnImage(src);
                         return processedImage;
                     }
                 case ConfigClass.processMode.Contour:
                     {
                         findContours fC = new();
-                        processedImage = fC.findContImg(src);
+                        processedImage = fC.processAndReturnImage(src);
                         return processedImage;
                     }
                 case ConfigClass.processMode.SimpleThreshold:
                     {
                         simpleThreshold sT = new();
-                        processedImage = sT.simpleThresholdImg(srcGray);
+                        processedImage = sT.processAndReturnImage(src);
                         return processedImage;
                     }
                 case ConfigClass.processMode.OtsuThreshold:
                     {
                         otsuThreshold oT = new();
-                        processedImage = oT.otsuThresholdImg(srcGray);
+                        processedImage = oT.processAndReturnImage(src);
                         return processedImage;
                     }
                 case ConfigClass.processMode.AdaptiveThreshold:
                     {
                         adaptiveThreshold aT = new();
-                        processedImage = aT.adaptiveThresholdImg(srcGray);
+                        processedImage = aT.processAndReturnImage(src);
                         return processedImage;
                     }
                 case ConfigClass.processMode.BradleyThreshold:
                     {
                         bradleyThreshold bT = new();
-                        processedImage = bT.bradleyThresholdImg(srcGray);
+                        processedImage = bT.processAndReturnImage(src);
                         return processedImage;
                     }
                 case ConfigClass.processMode.Canny:
                     {
                         cannyEdgeDetection cED = new();
-                        processedImage = cED.cannyEdgeDetectionImg(srcGray);
+                        processedImage = cED.processAndReturnImage(src);
                         return processedImage;
                     }
                 default:

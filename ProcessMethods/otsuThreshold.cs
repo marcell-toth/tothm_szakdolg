@@ -7,14 +7,25 @@ using System.Threading.Tasks;
 
 namespace tothm_szak.ProcessMethods
 {
-    internal class otsuThreshold
+    internal class otsuThreshold : IClassification
     {
-        public Mat otsuThresholdImg(Mat src)
+        public Mat? baseImage { get; set; }
+        public Mat processAndReturnImage(Mat source)
         {
-            Cv2.GaussianBlur(src, src, new Size(3,3), 0, 0,BorderTypes.Default);
-            Cv2.Threshold(src, src, 150, 255, ThresholdTypes.Otsu);
+            if (source != null && !source.Empty())
+            {
+                baseImage = source;
+                Mat processedImage = new Mat();
+                Cv2.CvtColor(baseImage, processedImage, ColorConversionCodes.BGR2GRAY);
 
-            return src;
+                Cv2.GaussianBlur(processedImage, processedImage, new Size(3, 3), 0, 0, BorderTypes.Default);
+                Cv2.Threshold(processedImage, processedImage, 150, 255, ThresholdTypes.Otsu);
+
+                return processedImage;
+            } else
+            {
+                return new Mat(256, 256, MatType.CV_8UC1, 0);
+            }
         }
     }
 }
