@@ -8,8 +8,8 @@
         Title="Szakdolgozat" Width="850" Height="450" Top="0" Left="0" MinWidth="750" MinHeight="500" Padding="0,0,0,0" ResizeMode="CanResizeWithGrip" >
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF251D2B" Offset="0.783"/>
-            <GradientStop Color="#FF4F3E5F" Offset="0"/>
+            <GradientStop Color="#FF222023" Offset="0.783"/>
+            <GradientStop Color="#FF55505B" Offset="0"/>
             <GradientStop Color="#FF1B1521" Offset="0.993"/>
         </LinearGradientBrush>
     </Window.Background>
@@ -35,18 +35,18 @@
             <Rectangle.Fill>
 
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF271735" Offset="0" />
+                    <GradientStop Color="#FF2A2132" Offset="0" />
                     <GradientStop Color="#FF17121C" Offset="1" />
-                    <GradientStop Color="#FF211A28" Offset="0.911"/>
+                    <GradientStop Color="#FF211E23" Offset="0.911"/>
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
 
 
-        <Frame x:Name="mainFrame" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Margin="30,30,30,30" BorderThickness="10,10,10,10" NavigationUIVisibility="Hidden" Visibility="Hidden">
+        <Frame x:Name="mainFrame" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Margin="30,10,30,10" BorderThickness="10,10,10,10" NavigationUIVisibility="Hidden" Visibility="Hidden">
 
             <Frame.BorderBrush>
-                <SolidColorBrush Color="#FF3D0D5C" Opacity="0.5"/>
+                <SolidColorBrush Color="#FF473D4E" Opacity="0.5"/>
             </Frame.BorderBrush>
         </Frame>
         <!--
@@ -56,7 +56,13 @@
         <Button x:Name="btMainPage" Content="Fő ablak" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="0" Click="btPage1_Click" Padding="0,1,0,1"/>
         <Button x:Name="btSettings" Grid.Column="1" Content="Beállítások" BorderThickness="0,1,0,1" Padding="0,1,0,1" Click="btSettings_Click"/>
         <Button x:Name="btExit" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Height="45" Width="90" Background="#FFFF1515" FontSize="16" FontWeight="Bold" Click="btExit_Click" Margin="15,0,0,15"/>
-        <Button x:Name="btOpenDir" Grid.Column="4" Content="Tallózás" Margin="25,8,0,8" HorizontalAlignment="Left" Width="80" Click="btOpenDir_Click"/>
+        <Button x:Name="btOpenDir" Grid.Column="4" Content="Tallózás" Margin="25,8,0,8" HorizontalAlignment="Left" Width="80" Click="btOpenDir_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
         <TextBlock x:Name="tbDirPath" Grid.Column="4" Margin="120,12,0,12" Text="%Path" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow" FontSize="16" FontWeight="Bold" TextDecorations="Underline" Foreground="#FFAEAEAE"/>
         <TextBlock x:Name="tbProcessMode" Text="Feldolgozás: " Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="10,30,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="18" Foreground="#FFD9D9D9" Visibility="Hidden"/>
         <TextBlock x:Name="tbAllowedFiles" Text="Képfájlok: " Grid.ColumnSpan="2" Margin="10,100,0,0" Grid.Row="1" Foreground="#FFD9D9D9" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Hidden"/>
