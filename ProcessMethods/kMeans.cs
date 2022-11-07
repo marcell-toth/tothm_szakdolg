@@ -2,6 +2,7 @@
 using OpenCvSharp.Flann;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -20,16 +21,38 @@ namespace tothm_szak.ProcessMethods
                 baseImage = source;
                 Mat processedImage = new Mat();
                 Cv2.CvtColor(baseImage, processedImage, ColorConversionCodes.BGR2HSV);
-                processedImage.ConvertTo(processedImage, MatType.CV_32FC1);
+                processedImage.ConvertTo(processedImage, MatType.CV_32FC3);
 
-                //Mat labels = new Mat();
-                //Mat centers = new Mat();
-                //Cv2.Kmeans(processedImage, 4, labels, TermCriteria.Both(40, 40), 1, KMeansFlags.PpCenters, centers);
+                Mat vectorImg = processedImage.Reshape(3, processedImage.Rows * processedImage.Cols);
+
+
+                Mat labels = new Mat();
+                Mat centers = new Mat();
+                Cv2.Kmeans(vectorImg, 8, labels, TermCriteria.Both(10, 5.0), 3, KMeansFlags.PpCenters, centers);
+
+                Mat fullImg = new Mat(processedImage.Rows, processedImage.Cols, MatType.CV_8UC3);
+                for (int i = 0; i < processedImage.Rows; i++)
+                {
+                    for (int j = 0; j < processedImage.Cols; j++) {
+                        int clusterIndex = labels.At<int>(0, i * processedImage.Rows + j);
+
+                        Vec3b newPixel = new Vec3b
+                        {
+                            Item0 = (byte)centers.At<float>(clusterIndex, 0), // B
+                            Item1 = (byte)centers.At<float>(clusterIndex, 1), // G
+                            Item2 = (byte)centers.At<float>(clusterIndex, 2) // R
+                        };
+
+                        fullImg.At<Vec3b>(i, j) = newPixel;
+
+                    }
+                }
+
 
                 processedImage.ConvertTo(processedImage, MatType.CV_8UC3);
                 Cv2.CvtColor(processedImage, processedImage, ColorConversionCodes.HSV2BGR);
 
-                return processedImage;
+                return fullImg;
             }
             else
             {
