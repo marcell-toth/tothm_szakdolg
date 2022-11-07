@@ -37,8 +37,8 @@ namespace tothm_szak
             
             // Width is based on the screen width
             // Height is set as a fraction of with
-            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 0.7);
-            this.Height = (this.Width*0.65);
+            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 0.8);
+            this.Height = (this.Width * 0.45);
 
             mainpage = new MainPage();
             setpage = new SettingsPage();

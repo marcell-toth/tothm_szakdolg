@@ -190,11 +190,13 @@ namespace tothm_szak.Pages
         {
             if (cbProcessed.IsChecked == true)
             {
-                testImg.Source = biTs;
+                testImg1.Source = biT;
+                testImg2.Source = biTs;
             }
             else
             {
-                testImg.Source = biT;
+                testImg1.Source = biT;
+                testImg2.Source = biT;
             }
         }
         private void loadImageNum(int dir)

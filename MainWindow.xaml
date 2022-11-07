@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:tothm_szak"
         mc:Ignorable="d"
-        Title="Szakdolgozat" Width="850" Height="450" Top="0" Left="0" MinWidth="750" MinHeight="500" Padding="0,0,0,0" ResizeMode="CanResizeWithGrip" >
+        Title="Szakdolgozat" Width="850" Height="350" Top="0" Left="0" MinWidth="940" MinHeight="450" Padding="0,0,0,0" ResizeMode="CanResizeWithGrip" >
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF222023" Offset="0.783"/>
