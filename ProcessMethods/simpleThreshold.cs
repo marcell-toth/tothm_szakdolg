@@ -12,18 +12,31 @@ namespace tothm_szak.ProcessMethods
         public Mat? baseImage { get; set; }
         public Mat processAndReturnImage(Mat source)
         {
+            //megadott source kép ellenőrzése
             if (source != null && !source.Empty())
             {
                 baseImage = source;
-                Mat processedImage = new Mat();
 
-                Cv2.CvtColor(baseImage, processedImage, ColorConversionCodes.BGR2GRAY);
-                Cv2.Threshold(processedImage, processedImage, 150, 255, ThresholdTypes.Binary);
-                return processedImage;
+                return applyThreshold(source);
             } else
             {
+                //ha a megadott kép null vagy empty,
+                //egy 256x256 fekete kép kerül visszaküldésre
                 return new Mat(256, 256, MatType.CV_8UC1, 0);
             }
+        }
+
+        // küszöbértékelás alkalmazása
+        private Mat applyThreshold(Mat source, int thresh = 150)
+        {
+            Mat processedImage = new Mat();
+
+            // input kép szürkére alakítása
+            Cv2.CvtColor(source, processedImage, ColorConversionCodes.BGR2GRAY);
+
+            // küszöb alkalmazása
+            Cv2.Threshold(processedImage, processedImage, thresh, 255, ThresholdTypes.Binary);
+            return processedImage;
         }
     }
 }

@@ -9,22 +9,43 @@ namespace tothm_szak.ProcessMethods
 {
     internal class adaptiveThreshold : IClassification
     {
+        /// <summary>
+        /// Adaptív küszöbértékelés
+        /// </summary>
         public Mat? baseImage { get; set; }
         public Mat processAndReturnImage(Mat source)
         {
+            // megadott source kép ellenőrzése
             if (source != null && !source.Empty())
             {
-                baseImage = source;
-                Mat processedImage = new Mat();
-                Cv2.CvtColor(baseImage, processedImage, ColorConversionCodes.BGR2GRAY);
-
-                processedImage = processedImage.MedianBlur(3);
-                Cv2.AdaptiveThreshold(processedImage, processedImage, 255, AdaptiveThresholdTypes.GaussianC, ThresholdTypes.BinaryInv, 7, 7);
-                return processedImage;
+                // küszöbértékelés alkalmazása
+                return applyThreshold(source);
             } else
             {
+                //ha a megadott kép null vagy empty,
+                //egy 256x256 fekete kép kerül visszaküldésre
                 return (new Mat(256, 256, MatType.CV_8UC1, 0));
             }
+        }
+
+        //küszöbértékelés alkalmazása
+        private Mat applyThreshold(Mat source, int blocksize = 7, int weight = 10)
+        {
+            baseImage = source;
+            Mat processedImage = new Mat();
+
+            // input kép színterének átváltása fekete/fehérre
+            Cv2.CvtColor(baseImage, processedImage, ColorConversionCodes.BGR2GRAY);
+
+            // elmosás a kimenet javításához
+            processedImage = processedImage.MedianBlur(3);
+
+            // adaptív küszöbértékelés végrehajtása
+            // AdaptiveThresholdTypes: Gaussian/Mean
+            // blocksize: futó ablak mérete(7x7)
+            // weight: ablakban kapott érték súlyozása(+, -)
+            Cv2.AdaptiveThreshold(processedImage, processedImage, 255, AdaptiveThresholdTypes.GaussianC, ThresholdTypes.BinaryInv, blocksize, weight);
+            return processedImage;
         }
     }
 }

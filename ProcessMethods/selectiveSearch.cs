@@ -11,6 +11,10 @@ namespace tothm_szak.ProcessMethods
 {
     internal class selectiveSearch : IClassification
     {
+        /// <summary>
+        /// Selective search method
+        /// Unfinished
+        /// </summary>
         public Mat? baseImage { get; set; }
         public Mat processAndReturnImage(Mat source)
         {

@@ -232,7 +232,6 @@ namespace tothm_szak.Pages
             }
             cyclePage(currentImage);
         }
-
         private void cyclePage(int currentImg)
         {
             int cmpPage = (currentImg) / 16;

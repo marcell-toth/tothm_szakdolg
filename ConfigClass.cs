@@ -13,6 +13,9 @@ namespace tothm_szak
         //this is a temporary solution
         //try to replace later with OOP
 
+        //after 2 weeks, this is a forever temporary solution
+        // :C
+
         /// <summary>
         /// Static class for storing global variables used through the application
         /// Contains the path to the folder containing the sampled images,
@@ -20,11 +23,16 @@ namespace tothm_szak
         /// and the allowed file extensions
         /// </summary>
 
+        //tallózott mappa elérési újta
         public static string folderPath = "";
 
+        //string enumerable tároló a kiválasztott képek elérési útjáról
         public static IEnumerable<string> ImgPath = Enumerable.Empty<string>();
 
+        //aktív feldolgozási módot jelölő változó
         public static processMode activeProcessMode = processMode.None;
+
+        //enum változó ami az összes lehetséges feldolgozási módot tartalmazza
         public enum processMode
         {
             None,

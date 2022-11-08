@@ -16,6 +16,7 @@ namespace tothm_szak
     /// </summary>
     public static class ImageProcUtility
     {
+        // currently unused
         public static Bitmap ConvertToBitmap(string fileName)
         {
             Bitmap bitmap;
