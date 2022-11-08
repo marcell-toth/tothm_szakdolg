@@ -67,7 +67,7 @@ namespace tothm_szak.ProcessMethods
                     for (int j = 0; j < processedImage.Cols; j++)
                     {
                         //ID => eredeti(H x W) és vektor(H * W) kép pixeleinek megfeleltetése
-                        int clusterIndex = labels.At<int>(i * processedImage.Rows + j, 0);
+                        int clusterIndex = labels.At<int>(i * processedImage.Cols + j, 0);
 
                         //új pixel változó
                         Vec3b ujPixel = new Vec3b
