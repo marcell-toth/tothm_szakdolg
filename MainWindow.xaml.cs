@@ -59,6 +59,7 @@ namespace tothm_szak
         {
             mainFrame.Content = mainpage;
             enableSideInfo();
+            SetTestInfo();
             SetVisibilityOnButton();
         }
 
@@ -79,11 +80,11 @@ namespace tothm_szak
         // Sets chosen folder's path
         private void btOpenDir_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.FolderBrowserDialog folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
 
-            if (folderBrowserDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                ConfigClass.folderPath = folderBrowserDialog1.SelectedPath;
+                ConfigClass.folderPath = folderBrowserDialog.SelectedPath;
                 tbDirPath.Text = ConfigClass.folderPath;
             }
         }
@@ -101,5 +102,28 @@ namespace tothm_szak
             tbProcessMode.Visibility = Visibility.Visible;
         }
 
+        // tesztelési info lekérése
+        // aktív tesztelési módok kiírása
+        private void SetTestInfo()
+        {
+            string enabledTestTypes = "";
+            if (ConfigClass.testModes[ConfigClass.elemTeszt.singleTest])
+            {
+                enabledTestTypes += "Egyéni teszt\n";
+            }
+            if (ConfigClass.testModes[ConfigClass.elemTeszt.folderTest])
+            {
+                enabledTestTypes += "Mappa teszt\n";
+            }
+
+            if (enabledTestTypes != "")
+            {
+                tbTestMode.Text = "Tesztek:\n" + enabledTestTypes;
+            } else
+            {
+                tbTestMode.Text = "Tesztek:\n" + "Semmi\n";
+            }
+            tbTestMode.Visibility = Visibility.Visible;
+        }
     }
 }

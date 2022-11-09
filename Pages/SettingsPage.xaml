@@ -72,6 +72,28 @@
             </CheckBox.RenderTransform>
         </CheckBox>
 
+        <TextBlock x:Name="tbTestType" Text="Tesztelési módok" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="20" Margin="10,20,0,0" TextWrapping="Wrap"/>
+        <CheckBox x:Name="cbSingleTest" Grid.Column="2" Content="Egy elem teszt" HorizontalAlignment="Left" Margin="70,80,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" RenderTransformOrigin="0.5,0.5" Padding="4,-1,0,0" IsChecked="True" Checked="TestModeCheck" Unchecked="TestModeCheck">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
+        <CheckBox x:Name="cbMultiTest" Grid.Column="2" Content="Több elem teszt" HorizontalAlignment="Left" Margin="72,140,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" RenderTransformOrigin="0.5,0.5" Padding="4,-1,0,0" IsChecked="False" Checked="TestModeCheck" Unchecked="TestModeCheck">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
+        
 
     </Grid>
 </Page>

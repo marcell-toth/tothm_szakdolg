@@ -1,9 +1,11 @@
-﻿using System;
+﻿using OpenCvSharp.Aruco;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using tothm_szak.Pages;
 
 namespace tothm_szak
 {
@@ -35,18 +37,46 @@ namespace tothm_szak
         //enum változó ami az összes lehetséges feldolgozási módot tartalmazza
         public enum processMode
         {
+            [Description ("Semmi")]
             None,
+            [Description("Szürkekép")]
             Grayscale,
+            [Description("Egyszerű küszöb")]
             SimpleThreshold,
+            [Description("Adaptív küszöb")]
             AdaptiveThreshold,
+            [Description("Otsu küszöb")]
             OtsuThreshold,
+            [Description("Bradley Roth küszöb")]
             BradleyThreshold,
+            [Description("Laplace él")]
             Laplace,
+            [Description("Canny él")]
             Canny,
+            [Description("Kontúr detektálás")]
             Contour,
+            [Description("Selective Search")]
             SelectiveSearch,
+            [Description("K-Means klaszter")]
             KMeans
         }
+
+        // tesztelési módok
+        public enum elemTeszt
+        {
+            singleTest, 
+            folderTest
+        }
+
+        // tesztelési módok és azok be/ki kapcsolásának tárolása
+        public static Dictionary<elemTeszt, bool> testModes = new Dictionary<elemTeszt, bool>
+        {
+            // alapértelmezett értéknek a gomb alapállapota
+            {elemTeszt.singleTest, true },
+            {elemTeszt.folderTest, false }
+        };
+
+            
 
         //allowed file extensions
         public static bool isAllowedPng = true;

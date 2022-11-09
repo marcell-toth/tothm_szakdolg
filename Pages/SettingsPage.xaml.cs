@@ -23,7 +23,6 @@ namespace tothm_szak.Pages
         public SettingsPage()
         {
             InitializeComponent();
-            //gitTest
         }
 
         private void btGrayscale_Checked(object sender, RoutedEventArgs e)
@@ -99,6 +98,24 @@ namespace tothm_szak.Pages
                     ConfigClass.isAllowedJpeg = true;
                 }
                 else { ConfigClass.isAllowedJpeg = false; }
+            }
+        }
+
+        private void TestModeCheck(object sender, RoutedEventArgs e)
+        {
+            if (settingsGrid.IsInitialized == true)
+            {
+                if (cbSingleTest.IsChecked == true)
+                {
+                    ConfigClass.testModes[ConfigClass.elemTeszt.singleTest] = true;
+                }
+                else { ConfigClass.testModes[ConfigClass.elemTeszt.singleTest] = false; }
+
+                if (cbMultiTest.IsChecked == true)
+                {
+                    ConfigClass.testModes[ConfigClass.elemTeszt.folderTest] = true;
+                }
+                else { ConfigClass.testModes[ConfigClass.elemTeszt.folderTest] = false; }
             }
         }
     }

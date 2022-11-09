@@ -24,8 +24,8 @@
       <FileName>ImageProcUtility.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="tothm_szak.MainWindow">
-    <Position X="4.25" Y="3" Width="1.5" />
+  <Class Name="tothm_szak.MainWindow" Collapsed="true">
+    <Position X="1.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAQABAAAEAAABBAAgAAAAAAACBAAAAAAAAAAA=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
@@ -33,7 +33,7 @@
     <Lollipop Position="0.217" />
   </Class>
   <Class Name="tothm_szak.Pages.MainPage" Collapsed="true">
-    <Position X="6" Y="4.5" Width="1.5" />
+    <Position X="3.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AARAAgEQQgIIAgEAABEAAAAAEAEBAAAAKgCAAkAAAAA=</HashCode>
       <FileName>Pages\MainPage.xaml.cs</FileName>
@@ -41,7 +41,7 @@
     <Lollipop Position="0.1" />
   </Class>
   <Class Name="tothm_szak.Pages.SettingsPage" Collapsed="true">
-    <Position X="6" Y="3.5" Width="1.5" />
+    <Position X="5.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAABACEAAAAAACAEAAAAACAAAAAAQgQIA=</HashCode>
       <FileName>Pages\SettingsPage.xaml.cs</FileName>
@@ -49,29 +49,29 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="tothm_szak.ProcessMethods.adaptiveThreshold" Collapsed="true">
-    <Position X="10" Y="0.5" Width="1.5" />
+    <Position X="11.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAIAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>ProcessMethods\adaptiveThreshold.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="tothm_szak.ProcessMethods.bradleyThreshold" Collapsed="true">
-    <Position X="8.25" Y="2.5" Width="1.5" />
+    <Position X="9.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAgAAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>ProcessMethods\bradleyThreshold.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="tothm_szak.ProcessMethods.cannyEdgeDetection" Collapsed="true">
-    <Position X="10" Y="2.5" Width="1.5" />
+    <Position X="11.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>ProcessMethods\cannyEdgeDetection.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="tothm_szak.ProcessMethods.findContours" Collapsed="true">
-    <Position X="10" Y="3.5" Width="1.5" />
+    <Position X="11.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAAAAAIAAAQAAAAAAAAAAAAAAAAAAAAAIAIAAA=</HashCode>
       <FileName>ProcessMethods\findContours.cs</FileName>
@@ -79,30 +79,30 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="tothm_szak.ProcessMethods.kMeans" Collapsed="true">
-    <Position X="9" Y="5.5" Width="1.5" />
+    <Position X="10.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>ProcessMethods\kMeans.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="tothm_szak.ProcessMethods.laplacian" Collapsed="true">
-    <Position X="10" Y="1.5" Width="1.5" />
+    <Position X="11.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAQBAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>ProcessMethods\laplacian.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="tothm_szak.ProcessMethods.otsuThreshold" Collapsed="true">
-    <Position X="8.25" Y="1.5" Width="1.5" />
+    <Position X="9.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAIAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>ProcessMethods\otsuThreshold.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="tothm_szak.ProcessMethods.selectiveSearch" Collapsed="true">
-    <Position X="10" Y="4.5" Width="1.5" />
+    <Position X="11.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>ProcessMethods\selectiveSearch.cs</FileName>
@@ -110,15 +110,24 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="tothm_szak.ProcessMethods.simpleThreshold" Collapsed="true">
-    <Position X="8.25" Y="0.5" Width="1.5" />
+    <Position X="9.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAIAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>ProcessMethods\simpleThreshold.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="System.Windows.Controls.Page" Collapsed="true">
+    <Position X="4.75" Y="4" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Windows.Window" Collapsed="true">
+    <Position X="1.25" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
   <Interface Name="tothm_szak.ProcessMethods.IClassification">
-    <Position X="6.5" Y="0.5" Width="1.5" />
+    <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>ProcessMethods\IClassification.cs</FileName>
