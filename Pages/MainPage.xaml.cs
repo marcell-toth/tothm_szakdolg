@@ -167,24 +167,29 @@ namespace tothm_szak.Pages
         }
         private void loadImage(int num)
         {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-            //Mat src = Cv2.ImRead(images[num], ImreadModes.Grayscale);
             Mat src = new Mat(images[num], ImreadModes.Unchanged);
             Mat srcGray = new Mat(images[num], ImreadModes.Grayscale);
 
             Bitmap bT = BitmapConverter.ToBitmap(src);
-            
             biT = ImageProcUtility.Bitmap2BitmapImage(bT);
 
+
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             Mat processedImage = selectProcess(src, srcGray);
             Cv2.CvtColor(processedImage, processedImage, ColorConversionCodes.RGBA2RGB);
             Bitmap bTs = BitmapConverter.ToBitmap(processedImage, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
             biTs = ImageProcUtility.Bitmap2BitmapImage(bTs);
 
             loadImageOnly(biT, biTs);
+
             watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
-            lbExecTime.Content = "Time: " + elapsedMs +"ms";
+            if (ConfigClass.testModes[ConfigClass.elemTeszt.singleTest])
+            {
+                var elapsedMs = watch.ElapsedMilliseconds;
+                lbExecTime.Content = "Time: " + elapsedMs + "ms";
+            }
+
+            pbMultiTest.Value = ((double)(currentImage + 1) / (double)(numOfImages + 1) * 100);
         }
         private void loadImageOnly(BitmapImage imageBase, BitmapImage imageProc)
         {
@@ -407,6 +412,26 @@ namespace tothm_szak.Pages
         private void btPageUp_Click(object sender, RoutedEventArgs e)
         {
             pageButtonHandling(1);
+        }
+
+        private async void btStartTest_Click(object sender, RoutedEventArgs e)
+        {
+            int returnImageNum = currentImage;
+            Int64 elapsedMs = 0;
+            do
+            {
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                loadImageNum(-1);
+                watch.Stop();
+                elapsedMs += watch.ElapsedMilliseconds;
+                await Task.Delay(1);
+            } while (currentImage != returnImageNum);
+
+            MainWindow mainwin = (MainWindow)System.Windows.Window.GetWindow(this);
+            mainwin.tbTestOutput.Text = "Time: " + elapsedMs + "ms\n"
+                                        + "Képszám: " + numOfImages + "db\n"
+                                        + "Avg: " + elapsedMs / numOfImages + "ms\n";
+            mainwin.tbTestOutput.Visibility = Visibility.Visible;
         }
     }
 }

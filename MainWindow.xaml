@@ -67,6 +67,7 @@
         <TextBlock x:Name="tbProcessMode" Text="Feldolgozás: " Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="10,30,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="18" Foreground="#FFD9D9D9" Visibility="Hidden"/>
         <TextBlock x:Name="tbAllowedFiles" Text="Képfájlok: " Grid.ColumnSpan="2" Margin="10,100,0,0" Grid.Row="1" Foreground="#FFD9D9D9" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Hidden"/>
         <TextBlock x:Name="tbTestMode" HorizontalAlignment="Left" Margin="10,170,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Tesztek:" VerticalAlignment="Top" Foreground="#FFD9D9D9" FontSize="18" Visibility="Hidden"/>
+        <TextBlock x:Name="tbTestOutput" HorizontalAlignment="Left" Margin="10,260,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="#FFD9D9D9" FontSize="18" Visibility="Hidden"/>
 
 
     </Grid>
