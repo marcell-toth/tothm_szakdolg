@@ -107,20 +107,20 @@ namespace tothm_szak.Pages
             {
                 if (cbSingleTest.IsChecked == true)
                 {
-                    ConfigClass.testModes[ConfigClass.elemTeszt.singleTest] = true;
+                    ConfigClass.testModes[ConfigClass.testType.singleTest] = true;
                 }
-                else { ConfigClass.testModes[ConfigClass.elemTeszt.singleTest] = false; }
+                else { ConfigClass.testModes[ConfigClass.testType.singleTest] = false; }
 
                 if (cbMultiTest.IsChecked == true)
                 {
-                    ConfigClass.testModes[ConfigClass.elemTeszt.folderTest] = true;
+                    ConfigClass.testModes[ConfigClass.testType.folderTest] = true;
                     tbCycleNum.IsEnabled = true;  
 
                     tbWaitNum.IsEnabled = true;    
                 }
                 else 
                 { 
-                    ConfigClass.testModes[ConfigClass.elemTeszt.folderTest] = false;
+                    ConfigClass.testModes[ConfigClass.testType.folderTest] = false;
                     tbCycleNum.IsEnabled = false;
                     tbCycleNum.Text = "1";
 
@@ -132,8 +132,15 @@ namespace tothm_szak.Pages
 
         private void btSetMultitestConfig_Click(object sender, RoutedEventArgs e)
         {
-            int.TryParse(tbCycleNum.Text, out ConfigClass.cycleNum);
-            int.TryParse(tbWaitNum.Text, out ConfigClass.waitNum);
+            if (!int.TryParse(tbCycleNum.Text, out ConfigClass.cycleNum) || int.Parse(tbCycleNum.Text) < 1)
+            {
+                ConfigClass.cycleNum = 1;
+            }
+
+            if (!int.TryParse(tbWaitNum.Text, out ConfigClass.waitNum) || int.Parse(tbWaitNum.Text) < 1)
+            {
+                ConfigClass.waitNum = 0;
+            }
         }
     }
 }

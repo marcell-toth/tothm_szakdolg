@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace tothm_szak.ProcessMethods
 {
-    internal class kMeans
+    internal class kMeans 
     {
         public Mat? baseImage { get; set; }
 

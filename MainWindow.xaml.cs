@@ -102,16 +102,16 @@ namespace tothm_szak
             tbProcessMode.Visibility = Visibility.Visible;
         }
 
-        // tesztelési info lekérése
-        // aktív tesztelési módok kiírása
+        // Gets test config
+        // displays currently selected test configs
         private void SetTestInfo()
         {
             string enabledTestTypes = "";
-            if (ConfigClass.testModes[ConfigClass.elemTeszt.singleTest])
+            if (ConfigClass.testModes[ConfigClass.testType.singleTest])
             {
                 enabledTestTypes += "Egyéni teszt\n";
             }
-            if (ConfigClass.testModes[ConfigClass.elemTeszt.folderTest])
+            if (ConfigClass.testModes[ConfigClass.testType.folderTest])
             {
                 enabledTestTypes += "Mappa teszt\n" + "Kör: " + ConfigClass.cycleNum + "\nVár: " + ConfigClass.waitNum + "(ms)";
             }

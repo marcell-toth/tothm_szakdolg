@@ -12,7 +12,7 @@ using OpenCvSharp.Extensions;
 
 namespace tothm_szak.ProcessMethods
 {
-    internal class bradleyThreshold
+    internal class bradleyThreshold : IClassification
     {
         /// <summary>
         /// Implementation of the Bradley Roth method of image segmentation

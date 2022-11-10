@@ -11,9 +11,14 @@
           <NewMemberFileName>ConfigClass.cs</NewMemberFileName>
         </TypeIdentifier>
       </Enum>
+      <Enum Name="tothm_szak.ConfigClass.testType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ConfigClass.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAAAAIIAAAAAIAAAAQAQAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAECAAAIAIIAAAAAIAAAAQAQAAAAAAAAgAAAA=</HashCode>
       <FileName>ConfigClass.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -21,29 +26,29 @@
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAQQAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ImageProcUtility.cs</FileName>
+      <FileName>Utility\ImageProcUtility.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="tothm_szak.MainWindow" Collapsed="true">
-    <Position X="1.25" Y="5.25" Width="1.5" />
+    <Position X="4.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQABAAAEAAABBAAgAAAAAAACBAAAAAAAAAAA=</HashCode>
+      <HashCode>AgAAAAAAQABAAAEAAABBAAgAAAAAAACBAAAAAAAAAAA=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.217" />
   </Class>
   <Class Name="tothm_szak.Pages.MainPage" Collapsed="true">
-    <Position X="3.75" Y="5.25" Width="1.5" />
+    <Position X="3.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AARAAgEQQgIIAgEAABEAAAAAEAEBAAAAKgCAAkAAAAA=</HashCode>
+      <HashCode>AARAAgEQQgIIAgEAABEIAAAAEAEBAAACKgCAAkAAAAA=</HashCode>
       <FileName>Pages\MainPage.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.1" />
   </Class>
   <Class Name="tothm_szak.Pages.SettingsPage" Collapsed="true">
-    <Position X="5.75" Y="5.25" Width="1.5" />
+    <Position X="5.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAAAAAAAAABACEAAAAAACAEAAAAACAAAAAAQgQIA=</HashCode>
+      <HashCode>AABAAAgAAAAAABACEAAAAAACAEAAQAACAAAAAAQgQIA=</HashCode>
       <FileName>Pages\SettingsPage.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -62,6 +67,7 @@
       <HashCode>AAAAAgAAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>ProcessMethods\bradleyThreshold.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="tothm_szak.ProcessMethods.cannyEdgeDetection" Collapsed="true">
     <Position X="11.5" Y="2.5" Width="1.5" />
@@ -69,6 +75,7 @@
       <HashCode>AAAEAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>ProcessMethods\cannyEdgeDetection.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="tothm_szak.ProcessMethods.findContours" Collapsed="true">
     <Position X="11.5" Y="3.5" Width="1.5" />
@@ -102,7 +109,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="tothm_szak.ProcessMethods.selectiveSearch" Collapsed="true">
-    <Position X="11.5" Y="4.5" Width="1.5" />
+    <Position X="10.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>ProcessMethods\selectiveSearch.cs</FileName>
@@ -118,12 +125,12 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="System.Windows.Controls.Page" Collapsed="true">
-    <Position X="4.75" Y="4" Width="1.5" />
+    <Position X="4.5" Y="4.5" Width="1.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="System.Windows.Window" Collapsed="true">
-    <Position X="1.25" Y="4" Width="1.5" />
+    <Position X="4.5" Y="2.25" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Interface Name="tothm_szak.ProcessMethods.IClassification">

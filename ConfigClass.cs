@@ -11,11 +11,11 @@ namespace tothm_szak
 {
     public static class ConfigClass
     {
-        //technically global variables violate OOP principles,
-        //this is a temporary solution
-        //try to replace later with OOP
+        // technically global variables violate OOP principles,
+        // this is a temporary solution
+        // try to replace later with OOP
 
-        //after 2 weeks, this is a forever temporary solution
+        // after 2 weeks, this is a forever temporary solution
         // :C
 
         /// <summary>
@@ -25,16 +25,17 @@ namespace tothm_szak
         /// and the allowed file extensions
         /// </summary>
 
-        //tallózott mappa elérési újta
+        // selected folder's path
         public static string folderPath = "";
 
-        //string enumerable tároló a kiválasztott képek elérési útjáról
+        // string enumerable stores the path to
+        // each of images with the correct file type
         public static IEnumerable<string> ImgPath = Enumerable.Empty<string>();
 
-        //aktív feldolgozási módot jelölő változó
+        // variable storing the currently selected processing method
         public static processMode activeProcessMode = processMode.None;
 
-        //enum változó ami az összes lehetséges feldolgozási módot tartalmazza
+        // enum containing all the selectable processing methods
         public enum processMode
         {
             [Description ("Semmi")]
@@ -61,27 +62,31 @@ namespace tothm_szak
             KMeans
         }
 
-        // tesztelési módok
-        public enum elemTeszt
+        // enum containing all the test options
+        public enum testType
         {
             singleTest, 
             folderTest
         }
 
-        // tesztelési módok és azok be/ki kapcsolásának tárolása
-        public static Dictionary<elemTeszt, bool> testModes = new Dictionary<elemTeszt, bool>
+        // storing the test options and their on/off state
+        public static Dictionary<testType, bool> testModes = new Dictionary<testType, bool>
         {
-            // alapértelmezett értéknek a gomb alapállapota
-            {elemTeszt.singleTest, true },
-            {elemTeszt.folderTest, false }
+            // setting default values matching the checkboxes
+            {testType.singleTest, true },
+            {testType.folderTest, false }
         };
 
+        // storing the parameters for the test going through the whole folder
+        // cycleNum is the number of times we go through the folder, minimum 1
+        // waitNum is the wait between images while iterating,
+        // wait does not get counted into the final time
         public static int cycleNum = 1;
         public static int waitNum = 1;
 
             
 
-        //allowed file extensions
+        // allowed file extensions
         public static bool isAllowedPng = true;
         public static bool isAllowedJpeg = true;
         public static bool isAllowedJpg = true;

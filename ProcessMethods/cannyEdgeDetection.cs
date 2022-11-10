@@ -8,7 +8,7 @@ using OpenCvSharp.Extensions;
 
 namespace tothm_szak.ProcessMethods
 {
-    internal class cannyEdgeDetection
+    internal class cannyEdgeDetection : IClassification
     {
         public Mat? baseImage { get; set; }
         public Mat processAndReturnImage(Mat source)
