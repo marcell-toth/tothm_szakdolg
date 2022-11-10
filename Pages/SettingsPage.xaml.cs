@@ -114,9 +114,26 @@ namespace tothm_szak.Pages
                 if (cbMultiTest.IsChecked == true)
                 {
                     ConfigClass.testModes[ConfigClass.elemTeszt.folderTest] = true;
+                    tbCycleNum.IsEnabled = true;  
+
+                    tbWaitNum.IsEnabled = true;    
                 }
-                else { ConfigClass.testModes[ConfigClass.elemTeszt.folderTest] = false; }
+                else 
+                { 
+                    ConfigClass.testModes[ConfigClass.elemTeszt.folderTest] = false;
+                    tbCycleNum.IsEnabled = false;
+                    tbCycleNum.Text = "1";
+
+                    tbWaitNum.IsEnabled = false;
+                    tbWaitNum.Text = "0";
+                }
             }
+        }
+
+        private void btSetMultitestConfig_Click(object sender, RoutedEventArgs e)
+        {
+            int.TryParse(tbCycleNum.Text, out ConfigClass.cycleNum);
+            int.TryParse(tbWaitNum.Text, out ConfigClass.waitNum);
         }
     }
 }

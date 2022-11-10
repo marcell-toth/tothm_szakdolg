@@ -76,6 +76,9 @@ namespace tothm_szak
             {elemTeszt.folderTest, false }
         };
 
+        public static int cycleNum = 1;
+        public static int waitNum = 1;
+
             
 
         //allowed file extensions

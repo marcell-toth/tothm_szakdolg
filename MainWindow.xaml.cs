@@ -113,7 +113,7 @@ namespace tothm_szak
             }
             if (ConfigClass.testModes[ConfigClass.elemTeszt.folderTest])
             {
-                enabledTestTypes += "Mappa teszt\n";
+                enabledTestTypes += "Mappa teszt\n" + "Kör: " + ConfigClass.cycleNum + "\nVár: " + ConfigClass.waitNum + "(ms)";
             }
 
             if (enabledTestTypes != "")

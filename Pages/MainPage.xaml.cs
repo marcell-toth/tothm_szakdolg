@@ -93,6 +93,7 @@ namespace tothm_szak.Pages
         }
         private void btRefresh_Click(object sender, RoutedEventArgs e)
         {
+            setTestControls(ConfigClass.testModes[ConfigClass.elemTeszt.folderTest]);
             currentImage = 0;
             numOfImages = 0;
             InnerGrid.Children.RemoveRange(0, InnerGrid.Children.Count);
@@ -187,6 +188,9 @@ namespace tothm_szak.Pages
             {
                 var elapsedMs = watch.ElapsedMilliseconds;
                 lbExecTime.Content = "Time: " + elapsedMs + "ms";
+            } else
+            {
+                lbExecTime.Content = "Time: - ms";
             }
 
             pbMultiTest.Value = ((double)(currentImage + 1) / (double)(numOfImages + 1) * 100);
@@ -414,23 +418,44 @@ namespace tothm_szak.Pages
             pageButtonHandling(1);
         }
 
+        private void setTestControls(bool isenabled)
+        {
+            btStartTest.IsEnabled = isenabled;
+            pbMultiTest.IsEnabled = isenabled;
+        }
+
         private async void btStartTest_Click(object sender, RoutedEventArgs e)
         {
-            int returnImageNum = currentImage;
+            //int returnImageNum = currentImage;
+            currentImage = 0;
+            int totalCheckedImage = 0;
             Int64 elapsedMs = 0;
-            do
+            for (int i = 0; i < ConfigClass.cycleNum; i++)
             {
-                var watch = System.Diagnostics.Stopwatch.StartNew();
-                loadImageNum(-1);
-                watch.Stop();
-                elapsedMs += watch.ElapsedMilliseconds;
-                await Task.Delay(1);
-            } while (currentImage != returnImageNum);
+                do
+                {
+                    var watch = System.Diagnostics.Stopwatch.StartNew();
+                    loadImageNum(-1);
+                    watch.Stop();
+                    totalCheckedImage++;
+                    elapsedMs += watch.ElapsedMilliseconds;
+                    int delay = ConfigClass.waitNum;
+
+                    if (ConfigClass.waitNum > 0)
+                    {
+                        await Task.Delay(delay);
+                    }
+                    else
+                    {
+                        await Task.Delay(1);
+                    }
+                } while (currentImage != 0);
+            }
 
             MainWindow mainwin = (MainWindow)System.Windows.Window.GetWindow(this);
             mainwin.tbTestOutput.Text = "Time: " + elapsedMs + "ms\n"
-                                        + "Képszám: " + numOfImages + "db\n"
-                                        + "Avg: " + elapsedMs / numOfImages + "ms\n";
+                                        + "Képszám: " + totalCheckedImage + "db\n"
+                                        + "Avg: " + elapsedMs / totalCheckedImage + "ms\n";
             mainwin.tbTestOutput.Visibility = Visibility.Visible;
         }
     }
