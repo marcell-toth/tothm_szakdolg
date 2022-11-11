@@ -44,7 +44,7 @@
 
         <Border x:Name="frameBorder" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" BorderThickness="0">
             <Border.Effect>
-                <DropShadowEffect Color="LightGray" ShadowDepth="2" BlurRadius="15" RenderingBias="Quality" Direction="270" />
+                <DropShadowEffect Color="LightGray" ShadowDepth="2" BlurRadius="15" RenderingBias="Performance" Direction="270" />
             </Border.Effect>
             <Frame x:Name="mainFrame" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Margin="30,10,30,10" NavigationUIVisibility="Hidden" Visibility="Visible">
             </Frame>

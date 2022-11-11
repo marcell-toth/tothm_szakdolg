@@ -25,6 +25,9 @@ namespace tothm_szak.Pages
             InitializeComponent();
         }
 
+        /// <summary>
+        /// button click events setting the currently selected processing method
+        /// </summary>
         private void btGrayscale_Checked(object sender, RoutedEventArgs e)
         {
             ConfigClass.activeProcessMode = ConfigClass.processMode.Grayscale;
@@ -76,6 +79,9 @@ namespace tothm_szak.Pages
             ConfigClass.activeProcessMode = ConfigClass.processMode.KMeans;
         }
 
+        /// <summary>
+        /// Checking which file extensions are allowed accorfing to settings given
+        /// </summary>
         private void FileTypeCheck(object sender, RoutedEventArgs e)
         {
             if (settingsGrid.IsInitialized == true)
@@ -101,6 +107,9 @@ namespace tothm_szak.Pages
             }
         }
 
+        /// <summary>
+        /// Checking which file extensions are allowed according to settings given
+        /// </summary>
         private void TestModeCheck(object sender, RoutedEventArgs e)
         {
             if (settingsGrid.IsInitialized == true)
@@ -130,6 +139,11 @@ namespace tothm_szak.Pages
             }
         }
 
+        /// <summary>
+        /// Button setting the prameters given for the multiple image test
+        /// Sets the number of cycles done through the directory, min: 1
+        /// Sets the wait time between image generations, min: 0 (treated as 1)
+        /// </summary>
         private void btSetMultitestConfig_Click(object sender, RoutedEventArgs e)
         {
             if (!int.TryParse(tbCycleNum.Text, out ConfigClass.cycleNum) || int.Parse(tbCycleNum.Text) < 1)

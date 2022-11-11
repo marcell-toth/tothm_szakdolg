@@ -29,6 +29,16 @@ namespace tothm_szak
             return bitmap;
         }
 
+
+        /// <summary>
+        /// Converts Bitmap type to BitmapImage
+        /// </summary>
+        /// <param name="inputBitmap">
+        /// Input image as type Bitmap
+        /// </param>
+        /// <returns>
+        /// Output image as type BitmapImage
+        /// </returns>
         public static BitmapImage Bitmap2BitmapImage(Bitmap inputBitmap)
         {
             using (var memory = new MemoryStream())
@@ -47,6 +57,15 @@ namespace tothm_szak
             }
         }
 
+        /// <summary>
+        /// Converts BitmapImage type to Bitmap
+        /// </summary>
+        /// <param name="bitmapImage">
+        /// Input image as type BitmapImage
+        /// </param>
+        /// <returns>
+        /// Output image as type Bitmap
+        /// </returns>
         public static Bitmap BitmapImage2Bitmap(BitmapImage bitmapImage)
         {
             //BitmapImage bitmapImageT = new BitmapImage(new Uri(images[0], UriKind.Absolute));
