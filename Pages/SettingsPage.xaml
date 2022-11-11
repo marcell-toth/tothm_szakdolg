@@ -16,14 +16,26 @@
 
     <Grid x:Name="settingsGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*" MinWidth="200"></ColumnDefinition>
+            <ColumnDefinition Width="1*" MinWidth="160"></ColumnDefinition>
+            <ColumnDefinition Width="1*" MinWidth="220"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
 
         </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" Grid.Row="0" BorderThickness="0,0,1,0" BorderBrush="Gray">
+            <Border.Effect>
+                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15" RenderingBias="Quality" Direction="180" />
+            </Border.Effect>
+        </Border>
+
+        <Border Grid.Column="1" Grid.Row="0" BorderThickness="0,0,1,0" BorderBrush="Gray">
+            <Border.Effect>
+                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15" RenderingBias="Quality" Direction="180" />
+            </Border.Effect>
+        </Border>
 
         <TextBlock x:Name="tbProcessMode" Text="Feldolgozás módja" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="20" Margin="10,20,0,0" TextWrapping="Wrap"/>
         <RadioButton x:Name="btNone" Content="None" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btNone_Checked" IsChecked="True"/>
