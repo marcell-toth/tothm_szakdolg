@@ -95,7 +95,7 @@
                 </TransformGroup>
             </CheckBox.RenderTransform>
         </CheckBox>
-        <CheckBox x:Name="cbMultiTest" Grid.Column="2" Content="Több elem teszt" HorizontalAlignment="Left" Margin="72,140,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" RenderTransformOrigin="0.5,0.5" Padding="4,-1,0,0" IsChecked="False" Checked="TestModeCheck" Unchecked="TestModeCheck">
+        <CheckBox x:Name="cbMultiTest" Grid.Column="2" Content="Több elem teszt" HorizontalAlignment="Left" Margin="72,140,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" RenderTransformOrigin="0.5,0.5" Padding="4,-1,0,0" IsChecked="True" Checked="TestModeCheck" Unchecked="TestModeCheck">
             <CheckBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="2" ScaleY="2"/>
@@ -107,8 +107,8 @@
         </CheckBox>
         <Label x:Name="lbCycle" Grid.Column="2" Content="Ciklus:" HorizontalAlignment="Left" Margin="105,170,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FFD1CECE"/>
         <Label x:Name="lbWait" Grid.Column="2" Content="Várakozás:" HorizontalAlignment="Left" Margin="73,200,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FFD1CECE"/>
-        <TextBox x:Name="tbCycleNum" Grid.Column="2" HorizontalAlignment="Left" Margin="170,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" FontSize="18" Text="1" IsEnabled="False"/>
-        <TextBox x:Name="tbWaitNum" Grid.Column="2" HorizontalAlignment="Left" Margin="170,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" FontSize="18" Text="0" IsEnabled="False"/>
+        <TextBox x:Name="tbCycleNum" Grid.Column="2" HorizontalAlignment="Left" Margin="170,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" FontSize="18" Text="1"/>
+        <TextBox x:Name="tbWaitNum" Grid.Column="2" HorizontalAlignment="Left" Margin="170,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" FontSize="18" Text="0"/>
         <Button x:Name="btSetMultitestConfig" Grid.Column="2" Content="Beállít" HorizontalAlignment="Left" Margin="170,240,0,0" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=tbWaitNum, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=tbWaitNum, Mode=OneWay}" Click="btSetMultitestConfig_Click">
             <Button.Resources>
                 <Style TargetType="Border">

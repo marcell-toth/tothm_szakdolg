@@ -74,7 +74,7 @@ namespace tothm_szak
         {
             // setting default values matching the checkboxes
             {testType.singleTest, true },
-            {testType.folderTest, false }
+            {testType.folderTest, true }
         };
 
         // storing the parameters for the test going through the whole folder

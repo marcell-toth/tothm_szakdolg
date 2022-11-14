@@ -606,6 +606,10 @@ namespace tothm_szak.Pages
             // by default runs once, value can be increased in settings
             for (int i = 0; i < ConfigClass.cycleNum; i++)
             {
+                // Garbage collection cleanup
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
+
                 // loop cycling through the directory
                 do
                 {
@@ -660,7 +664,7 @@ namespace tothm_szak.Pages
             mainwin.btSettings.IsEnabled = controlEnable;
             mainwin.btOpenDir.IsEnabled = controlEnable;
 
-            //page controls
+            // page controls
             btNextImg.IsEnabled = controlEnable;
             btPrevImg.IsEnabled = controlEnable;
             btPageUp.IsEnabled = controlEnable;
