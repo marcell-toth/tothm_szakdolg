@@ -101,6 +101,8 @@ namespace tothm_szak.ProcessMethods
                     }
                 }
             }
+            //return outImg;
+            Cv2.CvtColor(outImg, outImg, ColorConversionCodes.GRAY2BGR);
             return outImg;
         }
 
