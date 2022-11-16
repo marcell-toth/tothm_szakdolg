@@ -101,11 +101,11 @@ namespace tothm_szak.ProcessMethods
                     }
                 }
             }
-            //return outImg;
+            //return output;
             return outImg;
         }
 
-        // input kép integráljáak számítása
+        // input kép integráljának számítása
         // a metódus összeadja(integrálja) a kép összes elemének az értékét
         // balról jobbra, fentről lefele haladva, így minden elemnek,
         // a tőle balra vagy felette lévők csak nála kissebbek lehetnek
