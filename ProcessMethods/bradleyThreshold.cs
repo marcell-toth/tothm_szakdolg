@@ -53,7 +53,7 @@ namespace tothm_szak.ProcessMethods
         /// <param name="s"></param>
         /// Vizsgált ablak mérete default(61x61)
         /// <param name="t"></param>
-        /// Az ablakban mért átlag alatti legkissebb megengedett érték (%)
+        /// Az ablakban mért átlag alatti legkissebb megengedett érték (%) default (15)
         /// Ha az s ablakban mért átlag alatt van a vizsgált érték legalább t %-al, akkor fekete
         /// <returns></returns>
         private Mat bradleyThresholdProc(Mat source, int s = 61, int t = 15)
@@ -93,11 +93,11 @@ namespace tothm_szak.ProcessMethods
                     // ((100 - t) / 100) megadja a megengedett százalékban vett eltérést
                     if ((source.At<byte>(i, j) * count) < (sum * (100 - t) / 100))
                     {
-                        outImg.At<byte>(i, j) = 0;
+                        outImg.At<byte>(i, j) = 255;
                     }
                     else
                     {
-                        outImg.At<byte>(i, j) = 255;
+                        outImg.At<byte>(i, j) = 0;
                     }
                 }
             }
