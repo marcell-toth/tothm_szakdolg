@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenCvSharp;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -79,6 +80,20 @@ namespace tothm_szak
                 System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(outStream);
 
                 return new Bitmap(bitmap);
+            }
+        }
+
+        // checks if input is a 1 channel grayscale image, if not, converts it to one
+        public static Mat ConvertPotColorToGray(Mat source)
+        {
+            if (source.Channels() != 1)
+            {
+                Mat output = new();
+                Cv2.CvtColor(source, output, ColorConversionCodes.BGR2GRAY);
+                return output;
+            } else
+            {
+                return source;
             }
         }
     }
