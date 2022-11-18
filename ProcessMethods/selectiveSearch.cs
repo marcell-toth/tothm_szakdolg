@@ -1,11 +1,6 @@
-﻿using OpenCvSharp.XImgProc.Segmentation;
-using OpenCvSharp;
-using System;
-using System.Collections.Generic;
+﻿using OpenCvSharp;
+using OpenCvSharp.XImgProc.Segmentation;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace tothm_szak.ProcessMethods
 {

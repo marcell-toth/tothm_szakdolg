@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Markup;
-using OpenCvSharp;
+﻿using OpenCvSharp;
 
 namespace tothm_szak.ProcessMethods
 {

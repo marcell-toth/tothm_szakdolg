@@ -1,31 +1,16 @@
-﻿using System;
+﻿using OpenCvSharp;
+using OpenCvSharp.Extensions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Threading;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using OpenCvSharp;
-using OpenCvSharp.Extensions;
-using System.Drawing;
-using System.Media;
-using System.Drawing.Imaging;
-using OpenCvSharp.XImgProc.Segmentation;
-using System.Collections;
-using OpenCvSharp.ML;
-using System.Windows.Forms;
 using tothm_szak.ProcessMethods;
-using OpenCvSharp.XFeatures2D;
 //using System.Drawing;
 
 namespace tothm_szak.Pages
@@ -251,6 +236,9 @@ namespace tothm_szak.Pages
 
             // processing the source image and saving it to an OpenCV Mat variable
             // stopwatch to measure the time it takes to process an image
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+
             var watch = System.Diagnostics.Stopwatch.StartNew();
             Mat processedImage = selectProcess(src);
             watch.Stop();
