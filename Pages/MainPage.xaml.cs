@@ -144,6 +144,8 @@ namespace tothm_szak.Pages
                     tbImgCounter.Text = "1";
                     btPrevImg.IsEnabled = true;
                     btNextImg.IsEnabled = true;
+                    btPageUp.IsEnabled = true;
+                    btPageDown.IsEnabled = true;
                     generateButtons(currentPage);
                 } else
                 {
@@ -152,6 +154,8 @@ namespace tothm_szak.Pages
                     tbImgCounter.Text = "0";
                     btPrevImg.IsEnabled = false;
                     btNextImg.IsEnabled = false;
+                    btPageUp.IsEnabled = false;
+                    btPageDown.IsEnabled = false;
                 }
             }
         }
@@ -488,20 +492,32 @@ namespace tothm_szak.Pages
             switch (e.Key)
             {
                 case Key.Left:
-                    btPrevImg_Click(sender, e);
-                    e.Handled = true;
+                    if (btPrevImg.IsEnabled)
+                    {
+                        btPrevImg_Click(sender, e);
+                        e.Handled = true;
+                    }
                     break;
                 case Key.Right:
-                    btNextImg_Click(sender, e);
-                    e.Handled = true;
+                    if (btNextImg.IsEnabled)
+                    {
+                        btNextImg_Click(sender, e);
+                        e.Handled = true;
+                    }
                     break;
                 case Key.Up:
-                    btPageUp_Click(sender, e);
-                    e.Handled = true;
+                    if (btPageUp.IsEnabled)
+                    {
+                        btPageUp_Click(sender, e);
+                        e.Handled = true;
+                    }
                     break;
                 case Key.Down:
-                    btPageDown_Click(sender, e);
-                    e.Handled = true;
+                    if (btPageDown.IsEnabled)
+                    {
+                        btPageDown_Click(sender, e);
+                        e.Handled = true;
+                    }
                     break;
 
                 // default, nothing happens
