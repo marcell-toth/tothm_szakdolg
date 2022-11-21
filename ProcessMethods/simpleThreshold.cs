@@ -21,8 +21,33 @@ namespace tothm_szak.ProcessMethods
             }
         }
 
-        // küszöbértékelás alkalmazása
+        // küszöbértékelés alkalmazása
         private Mat applyThreshold(Mat source, int thresh = 150)
+        {
+            Mat processedImage = new Mat(source.Rows, source.Cols, MatType.CV_8UC1);
+
+            // input kép szürkére alakítása
+            Cv2.CvtColor(source, processedImage, ColorConversionCodes.BGR2GRAY);
+
+            for (int i = 0; i < source.Rows; i++)
+            {
+                for (int j = 0; j < source.Cols; j++)
+                {
+                    if (source.At<byte>(i, j) > thresh)
+                    {
+                        processedImage.At<byte>(i, j) = byte.MaxValue;
+                    } else
+                    {
+                        processedImage.At<byte>(i, j) = 0;
+                    }
+                }
+            }
+
+            return processedImage;
+        }
+
+        // küszöbértékelás alkalmazása meghívással
+        private Mat applyThresholdCall(Mat source, int thresh = 150)
         {
             Mat processedImage = new Mat();
 
