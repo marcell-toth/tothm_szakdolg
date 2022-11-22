@@ -1,4 +1,5 @@
 ﻿using OpenCvSharp;
+using System.Diagnostics;
 
 namespace tothm_szak.ProcessMethods
 {
@@ -30,10 +31,11 @@ namespace tothm_szak.ProcessMethods
             Cv2.CvtColor(source, processedImage, ColorConversionCodes.BGR2GRAY);
 
             // elmosás a kimenet javításához
-            Cv2.GaussianBlur(processedImage, processedImage, new Size(3, 3), 0, 0, BorderTypes.Default);
+            Cv2.GaussianBlur(processedImage, processedImage, new Size(7, 7), 0, 0, BorderTypes.Default);
 
             // küszöb alkalmazása
-            Cv2.Threshold(processedImage, processedImage, thresh, 255, ThresholdTypes.Otsu);
+            double tr = Cv2.Threshold(processedImage, processedImage, thresh, 255, ThresholdTypes.Otsu);
+            Trace.WriteLine("Otsu threshold generated value: " + tr);
 
             return processedImage;
         }

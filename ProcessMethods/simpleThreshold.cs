@@ -22,7 +22,7 @@ namespace tothm_szak.ProcessMethods
         }
 
         // küszöbértékelés alkalmazása
-        private Mat applyThreshold(Mat source, int thresh = 150)
+        private Mat applyThreshold(Mat source, int thresh = 128)
         {
             Mat processedImage = new Mat(source.Rows, source.Cols, MatType.CV_8UC1);
 

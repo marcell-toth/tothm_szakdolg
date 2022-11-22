@@ -54,7 +54,7 @@ namespace tothm_szak.ProcessMethods
 
             // bemenettel megegyező méretű, fekete/fehér(C1) kép létrehozása
             Mat outImg = new Mat(source.Rows, source.Cols, MatType.CV_8UC1);
-
+            s = (source.Rows + source.Cols) / 16;
             for (int i = 0; i < source.Rows; i++)
             {
                 for (int j = 0; j < source.Cols; j++)
@@ -84,11 +84,11 @@ namespace tothm_szak.ProcessMethods
                     // ((100 - t) / 100) megadja a megengedett százalékban vett eltérést
                     if ((source.At<byte>(i, j) * count) < (sum * (100 - t) / 100))
                     {
-                        outImg.At<byte>(i, j) = 255;
+                        outImg.At<byte>(i, j) = 0;
                     }
                     else
                     {
-                        outImg.At<byte>(i, j) = 0;
+                        outImg.At<byte>(i, j) = 255;
                     }
                 }
             }
