@@ -24,7 +24,7 @@ namespace tothm_szak.ProcessMethods
         }
 
         //küszöbértékelés alkalmazása
-        private Mat applyThreshold(Mat source, int blocksize = 7, int weight = 25)
+        private Mat applyThreshold(Mat source, int blocksize = 61, int weight = 15)
         {
             baseImage = source;
             Mat processedImage = new Mat();
@@ -33,11 +33,11 @@ namespace tothm_szak.ProcessMethods
             Cv2.CvtColor(baseImage, processedImage, ColorConversionCodes.BGR2GRAY);
 
             // elmosás a kimenet javításához
-            processedImage = processedImage.MedianBlur(3);
+            //processedImage = processedImage.MedianBlur(3);
 
             // adaptív küszöbértékelés végrehajtása
             // AdaptiveThresholdTypes: Gaussian/Mean
-            // blocksize: futó ablak mérete(7x7)
+            // blocksize: futó ablak mérete(blocksize x blocksize)
             // weight: ablakban kapott érték súlyozása(+, -)
             Cv2.AdaptiveThreshold(processedImage, processedImage, 255, AdaptiveThresholdTypes.MeanC, ThresholdTypes.Binary, blocksize, weight);
             return processedImage;

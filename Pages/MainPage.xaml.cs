@@ -226,7 +226,7 @@ namespace tothm_szak.Pages
         /// <param name="num">
         /// the number of the image to be loaded, ordered from 0 to the total number of images
         /// </param>
-        private void loadImage(int num)
+        private Int64 loadImage(int num)
         {
             // loading the image into a Mat file
             Mat src = new Mat(images[num], ImreadModes.Unchanged);
@@ -253,10 +253,11 @@ namespace tothm_szak.Pages
             // loading the source and processed image to the 2 display elements
             loadImageOnly(bitmapSource, bitmapProc);
 
+            Int64 elapsedMs = watch.ElapsedMilliseconds;
+
             // status of the stopwatch according to settings
             if (ConfigClass.testModes[ConfigClass.testType.singleTest])
             {
-                var elapsedMs = watch.ElapsedMilliseconds;
                 lbExecTime.Content = "Time: " + elapsedMs + "ms";
             } else
             {
@@ -265,6 +266,8 @@ namespace tothm_szak.Pages
 
             // updating the progress bar based on which image is loaded
             pbMultiTest.Value = ((double)(currentImage + 1) / (double)(numOfImages + 1) * 100);
+
+            return elapsedMs;
         }
 
         /// <summary>
@@ -301,8 +304,9 @@ namespace tothm_szak.Pages
         /// -1 means cycle forward one
         /// dir >= 0 means the image with the given number is to be loaded
         /// </param>
-        private void loadImageNum(int dir)
+        private long loadImageNum(int dir)
         {
+            Int64 measuredTime = 0;
             switch (dir)
             {
                 case -2:    //cycle back one
@@ -315,7 +319,7 @@ namespace tothm_szak.Pages
                                         
                         currentImage = currentImage % numOfImages;
                         tbImgCounter.Text = (currentImage + 1).ToString();
-                        loadImage(currentImage);
+                        measuredTime = loadImage(currentImage);
                         break;
                     }
                 case -1:    //cycle forward one
@@ -324,7 +328,7 @@ namespace tothm_szak.Pages
                         currentImage = currentImage % numOfImages;
 
                         tbImgCounter.Text = (currentImage + 1).ToString();
-                        loadImage(currentImage);
+                        measuredTime = loadImage(currentImage);
                         break;
                     }
                 default:    // dir >= 0, image with the given number is loaded
@@ -335,6 +339,9 @@ namespace tothm_szak.Pages
 
             // checking if page cycling is needed
             cyclePage(currentImage);
+
+            // measured time value returned, default 0ms
+            return measuredTime;
         }
 
         /// <summary>
@@ -613,18 +620,19 @@ namespace tothm_szak.Pages
                 // Garbage collection cleanup
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
-
+                long measuredTime;
                 // loop cycling through the directory
                 do
                 {
                     // loading the next image (-1 => next, -2 => previous) and measuring the load time
-                    var watch = System.Diagnostics.Stopwatch.StartNew();
-                    loadImageNum(-1);
-                    watch.Stop();
+                    //var watch = System.Diagnostics.Stopwatch.StartNew();
+                    measuredTime = loadImageNum(-1);
+                    //watch.Stop();
 
                     // incrementing checked image counter and summarizing the elapsed load time
                     totalCheckedImage++;
-                    elapsedMs += watch.ElapsedMilliseconds;
+                    //elapsedMs += watch.ElapsedMilliseconds;
+                    elapsedMs += measuredTime;
 
                     // waits for the set amount of time(ms)
                     // if given value is 0, waits for 1ms
