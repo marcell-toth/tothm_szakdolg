@@ -8,7 +8,7 @@ namespace tothm_szak.ProcessMethods
     {
         /// <summary>
         /// Selective search method
-        /// Unfinished
+        /// Unfinished, unused
         /// </summary>
         public Mat? baseImage { get; set; }
         public Mat processAndReturnImage(Mat source)

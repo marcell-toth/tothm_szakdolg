@@ -6,13 +6,6 @@ namespace tothm_szak
 {
     public static class ConfigClass
     {
-        // technically global variables violate OOP principles,
-        // this is a temporary solution
-        // try to replace later with OOP
-
-        // after 2 weeks, this is a forever temporary solution
-        // :C
-
         /// <summary>
         /// Static class for storing global variables used through the application
         /// Contains the path to the folder containing the sampled images,
@@ -51,8 +44,6 @@ namespace tothm_szak
             Canny,
             [Description("Kontúr detektálás")]
             Contour,
-            [Description("Selective Search")]
-            SelectiveSearch,
             [Description("K-Means klaszter")]
             KMeans
         }

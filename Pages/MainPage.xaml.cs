@@ -420,12 +420,6 @@ namespace tothm_szak.Pages
                         processedImage =  lL.processAndReturnImage(src);
                         return processedImage;
                     }
-                case ConfigClass.processMode.SelectiveSearch:
-                    {
-                        selectiveSearch sS = new();
-                        processedImage = sS.processAndReturnImage(src);
-                        return processedImage;
-                    }
                 case ConfigClass.processMode.Contour:
                     {
                         findContours fC = new();

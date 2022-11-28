@@ -28,8 +28,10 @@ namespace tothm_szak.ProcessMethods
             // kép átváltása szürkére
             Cv2.CvtColor(source, processedImage, ColorConversionCodes.BGR2GRAY);
 
+            Cv2.GaussianBlur(processedImage, processedImage, new Size(5, 5), 0, 0, BorderTypes.Default);
+
             // Laplacian éldetektálás alkalmazása
-            Cv2.Laplacian(processedImage, processedImage, MatType.CV_8UC1, 3, 1, 0, BorderTypes.Default);
+            Cv2.Laplacian(processedImage, processedImage, MatType.CV_8UC1, 3, 2, 0, BorderTypes.Default);
             return processedImage;
         }
     }

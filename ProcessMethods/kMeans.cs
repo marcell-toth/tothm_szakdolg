@@ -2,7 +2,7 @@
 
 namespace tothm_szak.ProcessMethods
 {
-    internal class kMeans 
+    internal class kMeans : IClassification
     {
         public Mat? baseImage { get; set; }
 
@@ -11,21 +11,26 @@ namespace tothm_szak.ProcessMethods
         /// </summary>
         /// <param name="source"></param>
         /// Source image
-        /// <param name="k"></param>
-        /// Number of clusters,
-        /// sets the amount of colors that will be present on the output image
-        /// <param name="maxCount"></param>
-        /// Termination Criteria, sets max iteration for every element
-        /// <param name="epsilon"></param>
-        /// Termination Criteria, sets required accuracy for every element
-        /// <param name="attempts"></param>
-        /// Sets how many times the process is rerun, due to the semi-random nature of the clustering,
-        /// running it multiple times and selecting the run with the least total variation for every element might be ideal
-        /// Variable returning the overall variation is returned as a double in Cv2.Kmeans
-        /// <returns></returns>
 
-        public Mat processAndReturnImage(Mat source, int k = 16, int maxCount = 100, double epsilon = 1.0, int attempts = 1)
+        public Mat processAndReturnImage(Mat source)
         {
+            /// <param name="k"></param>
+            /// Number of clusters,
+            /// sets the amount of colors that will be present on the output image
+            /// <param name="maxCount"></param>
+            /// Termination Criteria, sets max iteration for every element
+            /// <param name="epsilon"></param>
+            /// Termination Criteria, sets required accuracy for every element
+            /// <param name="attempts"></param>
+            /// Sets how many times the process is rerun, due to the semi-random nature of the clustering,
+            /// running it multiple times and selecting the run with the least total variation for every element might be ideal
+            /// Variable returning the overall variation is returned as a double in Cv2.Kmeans
+            
+            int k = 3;
+            int maxCount = 100;
+            double epsilon = 1.0;
+            int attempts = 4;
+
             //megadott source kép ellenőrzése
             if (source != null && !source.Empty())
             {
@@ -47,7 +52,7 @@ namespace tothm_szak.ProcessMethods
                 //középpontválasztási mód, csomópontok kimenete
                 Mat labels = new Mat();
                 Mat centers = new Mat();
-                Cv2.Kmeans(vectorImg, k, labels, TermCriteria.Both(maxCount, epsilon), attempts, KMeansFlags.PpCenters, centers);
+                Cv2.Kmeans(vectorImg, k, labels, TermCriteria.Both(maxCount, epsilon), attempts, KMeansFlags.RandomCenters, centers);
 
                 //kimeneti kép létrehozása az eredeti H x W adatok szerint,
                 //8UC3 => unsigned byte(8bit), 3 channel => [0, 0, 0] - [255, 255, 255]

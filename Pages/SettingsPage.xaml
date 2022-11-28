@@ -42,13 +42,12 @@
         <RadioButton x:Name="btGrayscale" Content="Grayscale" HorizontalAlignment="Left" Margin="10,110,0,0" Foreground="#FFD1CECE" FontSize="16" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Checked="btGrayscale_Checked"/>
         <RadioButton x:Name="btLaplace" Content="Laplace gradient" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btLaplace_Checked"/>
         <RadioButton x:Name="btContour" Content="Contour search" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btContour_Checked"/>
-        <RadioButton x:Name="btSearchSegment" Content="Search segment(teszt)" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btSearchSegment_Checked"/>
-        <RadioButton x:Name="btSimThreshold" Content="Simple threshold" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btSimThreshold_Checked"/>
-        <RadioButton x:Name="btAdpThreshold" Content="Adaptive threshold" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btAdpThreshold_Checked"/>
-        <RadioButton x:Name="btOtsuThreshold" Content="Otsu threshold" HorizontalAlignment="Left" Margin="10,290,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btOtsuThreshold_Checked"/>
-        <RadioButton x:Name="btBradleyThreshold" Content="Bradley threshold" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btBradleyThreshold_Checked"/>
-        <RadioButton x:Name="btCannyEdgeDet" Content="Canny edge detection" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btCannyEdgeDet_Checked"/>
-        <RadioButton x:Name="btKMeans" Content="K-Means" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btKMeans_Checked"/>
+        <RadioButton x:Name="btSimThreshold" Content="Simple threshold" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btSimThreshold_Checked"/>
+        <RadioButton x:Name="btAdpThreshold" Content="Adaptive threshold" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btAdpThreshold_Checked"/>
+        <RadioButton x:Name="btOtsuThreshold" Content="Otsu threshold" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btOtsuThreshold_Checked"/>
+        <RadioButton x:Name="btBradleyThreshold" Content="Bradley threshold" HorizontalAlignment="Left" Margin="10,290,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btBradleyThreshold_Checked"/>
+        <RadioButton x:Name="btCannyEdgeDet" Content="Canny edge detection" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btCannyEdgeDet_Checked"/>
+        <RadioButton x:Name="btKMeans" Content="K-Means" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Foreground="#FFD1CECE" FontSize="16" Checked="btKMeans_Checked"/>
 
 
 

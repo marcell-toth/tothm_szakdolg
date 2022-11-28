@@ -31,11 +31,6 @@ namespace tothm_szak.Pages
             ConfigClass.activeProcessMode = ConfigClass.processMode.Contour;
         }
 
-        private void btSearchSegment_Checked(object sender, RoutedEventArgs e)
-        {
-            ConfigClass.activeProcessMode = ConfigClass.processMode.SelectiveSearch;
-        }
-
         private void btSimThreshold_Checked(object sender, RoutedEventArgs e)
         {
             ConfigClass.activeProcessMode = ConfigClass.processMode.SimpleThreshold;
