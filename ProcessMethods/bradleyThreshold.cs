@@ -47,14 +47,14 @@ namespace tothm_szak.ProcessMethods
         /// Az ablakban mért átlag alatti legkissebb megengedett érték (%) default (15)
         /// Ha az s ablakban mért átlag alatt van a vizsgált érték legalább t %-al, akkor fekete
         /// <returns></returns>
-        private Mat bradleyThresholdProc(Mat source, int s = 61, int t = 15)
+        private Mat bradleyThresholdProc(Mat source, int s = 61, int t = 20)
         {
             // kép integrál számítása
             Mat intImg = integralImage(source);
 
             // bemenettel megegyező méretű, fekete/fehér(C1) kép létrehozása
             Mat outImg = new Mat(source.Rows, source.Cols, MatType.CV_8UC1);
-            s = (source.Rows + source.Cols) / 16;
+            s = (source.Rows + source.Cols) / 8;
             for (int i = 0; i < source.Rows; i++)
             {
                 for (int j = 0; j < source.Cols; j++)

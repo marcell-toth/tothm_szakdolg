@@ -28,7 +28,7 @@ namespace tothm_szak.ProcessMethods
             Cv2.CvtColor(source, processedImage, ColorConversionCodes.BGR2GRAY);
 
             // kimenet javításához elmosás
-            Cv2.GaussianBlur(processedImage, processedImage, new Size(3, 3), 0, 0, BorderTypes.Default);
+            Cv2.GaussianBlur(processedImage, processedImage, new Size(5, 5), 0, 0, BorderTypes.Default);
 
             // éldetektálás alkalmazása
             Cv2.Canny(processedImage, processedImage, t1, t2, aptSize, true);

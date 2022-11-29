@@ -26,7 +26,7 @@ namespace tothm_szak.ProcessMethods
             /// running it multiple times and selecting the run with the least total variation for every element might be ideal
             /// Variable returning the overall variation is returned as a double in Cv2.Kmeans
             
-            int k = 3;
+            int k = 8;
             int maxCount = 100;
             double epsilon = 1.0;
             int attempts = 4;
