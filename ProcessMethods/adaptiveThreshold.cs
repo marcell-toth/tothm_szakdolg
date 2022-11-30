@@ -25,11 +25,16 @@ namespace tothm_szak.ProcessMethods
         }
 
         //küszöbértékelés alkalmazása
-        private Mat applyThreshold(Mat source, int blocksize = 61, int weight = 15)
+        private Mat applyThreshold(Mat source, int blocksize = -1, int weight = 15)
         {
             baseImage = source;
             Mat processedImage = new Mat();
 
+            int scale = 2;
+            if (blocksize == -1) { 
+                blocksize = (source.Rows + source.Cols) / scale * 2;
+            } 
+            if (blocksize % 2 == 0) { blocksize++; }
             // input kép színterének átváltása fekete/fehérre
             Cv2.CvtColor(baseImage, processedImage, ColorConversionCodes.BGR2GRAY);
 

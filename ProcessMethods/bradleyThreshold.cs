@@ -1,6 +1,5 @@
 ﻿using OpenCvSharp;
 
-
 namespace tothm_szak.ProcessMethods
 {
     internal class bradleyThreshold : IClassification
@@ -13,7 +12,6 @@ namespace tothm_szak.ProcessMethods
         ///  meaning the method cycles through the given input multiple times.
         /// </summary>
         public Mat? baseImage { get; set; }
-
 
         public Mat processAndReturnImage(Mat source)
         {
@@ -52,9 +50,13 @@ namespace tothm_szak.ProcessMethods
             // kép integrál számítása
             Mat intImg = integralImage(source);
 
+            int scale = 16;
+
             // bemenettel megegyező méretű, fekete/fehér(C1) kép létrehozása
             Mat outImg = new Mat(source.Rows, source.Cols, MatType.CV_8UC1);
-            s = (source.Rows + source.Cols) / 8;
+            s = ((source.Rows + source.Cols) / scale * 2) + 1;
+            if (s % 2 == 0) { s++; }
+
             for (int i = 0; i < source.Rows; i++)
             {
                 for (int j = 0; j < source.Cols; j++)

@@ -574,6 +574,7 @@ namespace tothm_szak.Pages
         private void btPageDown_Click(object sender, RoutedEventArgs e)
         {
             pageButtonHandling(0);
+            e.Handled = true;
         }
 
         private void btPageUp_Click(object sender, RoutedEventArgs e)
